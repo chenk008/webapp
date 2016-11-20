@@ -32,9 +32,12 @@ public class MetricsUtils {
 		// METRIC_REGISTRY.registerAll(new
 		// BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
 
-		final ConsoleReporter reporter = ConsoleReporter.forRegistry(METRIC_REGISTRY).convertRatesTo(TimeUnit.SECONDS)
+		final ConsoleReporter reporter = ConsoleReporter.forRegistry(METRIC_REGISTRY)
+				//meter，timer统计频率的单位
+				.convertRatesTo(TimeUnit.SECONDS)
+				//timer中histogram 统计值的周期
 				.convertDurationsTo(TimeUnit.MILLISECONDS).build();
-		reporter.start(3, TimeUnit.SECONDS);
+		reporter.start(1, TimeUnit.MINUTES);
 	}
 
 	// 缓存接口这里是LoadingCache，LoadingCache在缓存项不存在时可以自动加载缓存
