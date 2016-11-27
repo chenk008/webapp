@@ -56,6 +56,7 @@ public class MyJedisClusterInfoCache {
 	public void discoverClusterNodesAndSlots(Jedis jedis) {
 		w.lock();
 
+		System.out.println("load cluster info");
 		try {
 			reset();
 			List<Object> slots = jedis.clusterSlots();

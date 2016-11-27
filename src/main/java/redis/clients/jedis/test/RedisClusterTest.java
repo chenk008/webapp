@@ -16,23 +16,33 @@ public class RedisClusterTest {
 		jedisClusterNodes.add(new HostAndPort("127.0.0.1", 7000));
 		MyBinaryJedisCluster jc = new MyBinaryJedisCluster(jedisClusterNodes);
 
-		String key = "1417";
-		jc.setnx(key, "bar");
-		String value = jc.get(key);
-		System.out.println("key-" + key + " slot-" + JedisClusterCRC16.getSlot(key) + " value-" + value);
-
-		String key2 = "288";
-		jc.setnx(key2, "bar2");
-		String value2 = jc.get(key2);
-		System.out.println("key-" + key2 + " slot-" + JedisClusterCRC16.getSlot(key2) + " value-" + value2);
 		try {
-			Thread.sleep(2000);
+			while (true) {
+				useRedis(jc);
+				Thread.sleep(2000);
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {
 			if (null != jc) {
 				jc.close();
 			}
+		}
+	}
+
+	public static void useRedis(MyBinaryJedisCluster jc) {
+		try {
+			String key = "1417";
+			jc.setnx(key, "bar");
+			String value = jc.get(key);
+			System.out.println("key-" + key + " slot-" + JedisClusterCRC16.getSlot(key) + " value-" + value);
+
+			String key2 = "288";
+			jc.setnx(key2, "bar2");
+			String value2 = jc.get(key2);
+			System.out.println("key-" + key2 + " slot-" + JedisClusterCRC16.getSlot(key2) + " value-" + value2);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
