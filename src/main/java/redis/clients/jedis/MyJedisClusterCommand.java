@@ -122,7 +122,7 @@ public abstract class MyJedisClusterCommand<T> {
 				} else {
 					if (isRead) {
 						connection = connectionHandler.getConnectionFromSlaveSlot(JedisClusterCRC16.getSlot(key));
-//						connection.readonly();
+						connection.readonly();
 					} else {
 						connection = connectionHandler.getConnectionFromSlot(JedisClusterCRC16.getSlot(key));
 					}
@@ -160,9 +160,11 @@ public abstract class MyJedisClusterCommand<T> {
 
 			return runWithRetries(key, attempts - 1, tryRandomNode, asking);
 		} catch (JedisRedirectionException jre) {
-			//发生move命令，slot错误
 			// if MOVED redirection occurred,
 			if (jre instanceof JedisMovedDataException) {
+				//发生move命令，slot错误
+
+				
 				// it rebuilds cluster's slot cache
 				// recommended by Redis cluster specification
 				this.connectionHandler.renewSlotCache(connection);

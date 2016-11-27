@@ -83,7 +83,6 @@ public class MyJedisClusterInfoCache {
 						assignSlotsToNode(slotNums, targetNode);
 					} else {
 						assignSlotsToSlaveNode(slotNums, targetNode);
-						System.out.println("slave:" + targetNode);
 					}
 				}
 			}
@@ -107,7 +106,7 @@ public class MyJedisClusterInfoCache {
 
 				if (jedis != null) {
 					try {
-						discoverClusterSlots(jedis);
+						discoverClusterNodesAndSlots(jedis);
 						return;
 					} catch (JedisException e) {
 						// try nodes from all pools
@@ -117,7 +116,7 @@ public class MyJedisClusterInfoCache {
 				for (JedisPool jp : getShuffledNodesPool()) {
 					try {
 						jedis = jp.getResource();
-						discoverClusterSlots(jedis);
+						discoverClusterNodesAndSlots(jedis);
 						return;
 					} catch (JedisConnectionException e) {
 						// try next nodes
@@ -163,23 +162,6 @@ public class MyJedisClusterInfoCache {
 			assignSlotsToNode(slotNums, targetNode);
 			
 			
-			// hostInfos
-//			int size = slotInfo.size();
-//			for (int i = MASTER_NODE_INDEX; i < size; i++) {
-//				List<Object> hostInfos = (List<Object>) slotInfo.get(i);
-//				if (hostInfos.size() <= 0) {
-//					continue;
-//				}
-//
-//				HostAndPort targetNode = generateHostAndPort(hostInfos);
-//				setupNodeIfNotExist(targetNode);
-//				if (i == MASTER_NODE_INDEX) {
-//					assignSlotsToNode(slotNums, targetNode);
-//				} else {
-//					assignSlotsToSlaveNode(slotNums, targetNode);
-//					System.out.println("slave:" + targetNode);
-//				}
-//			}
 		}
 	}
 

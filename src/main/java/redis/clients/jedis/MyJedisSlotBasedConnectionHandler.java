@@ -134,6 +134,11 @@ public class MyJedisSlotBasedConnectionHandler implements Closeable {
 		}
 	}
 
+	/**
+	 * 从slave节点取数据
+	 * @param slot
+	 * @return
+	 */
 	public Jedis getConnectionFromSlaveSlot(int slot) {
 		JedisPool connectionPool = cache.getSlaveSlotPool(slot);
 		if (connectionPool != null) {
