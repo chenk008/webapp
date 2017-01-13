@@ -1,8 +1,10 @@
 package org.ck.webapp.hotswap;
 
 /**
- * spring load只能reload .class文件
+ * spring load能reload .class文件
  * 正在执行的代码，是无法reload的
+ * -Dspringloaded=watchJars  可以监控并且reload jar
+ * -Dspringloaded="verbose;watchJars=spring-load-example-extra.jar" 
  * 
  * @author viruser
  *
