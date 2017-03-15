@@ -1,18 +1,10 @@
-package org.ck.webapp.jmx;
+package org.ck.webapp.jmx.dynamicBean;
 
-/**
- * MBean，被管理对象，一如JavaBean。Bean对象，实体，对应资源
- * 
- * 类名必须符合 MBean规范： xxx implments xxxMBean
- * 
- * @author ck
- *
- */
-public class ServerMonitor implements ServerMonitorMBean {
+public class ServerMonitorImpl {
 	private final long startTime;
 	private Runtime runtime = Runtime.getRuntime();
 
-	public ServerMonitor() {
+	public ServerMonitorImpl() {
 		startTime = System.currentTimeMillis();
 	}
 

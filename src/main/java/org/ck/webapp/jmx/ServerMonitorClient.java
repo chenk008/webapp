@@ -17,8 +17,8 @@ public class ServerMonitorClient {
 		// } );
 		JMXConnector conn = JMXConnectorFactory.connect(url, env);
 
-		CMonitor0 monitor = JMX.newMBeanProxy(conn.getMBeanServerConnection(),
-				new ObjectName("com.jmx:type=ServerMonitor"), CMonitor0.class);
+		ServerMonitorMBean monitor = JMX.newMBeanProxy(conn.getMBeanServerConnection(),
+				new ObjectName("com.jmx:type=ServerMonitor"), ServerMonitorMBean.class);
 		for (int i = 0; i < 10; i++) {
 			System.out.println(monitor.getUptime());
 			System.out.println(monitor.getMemory());
