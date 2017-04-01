@@ -5,16 +5,16 @@ import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * 
- * æ„é€ å’ŒMemcached slab/chunkç±»ä¼¼çš„Javaå†…å­˜ç®¡ç†æ–¹å¼ï¼Œä¸ºç¼“å­˜çš„å¯¹è±¡åˆ†é…ä¸€ç»„chunckï¼Œç›¸åŒSizeçš„Chunkåˆæˆä¸€ç»„Slabã€‚
+ * ¹¹ÔìºÍMemcached slab/chunkÀàËÆµÄJavaÄÚ´æ¹ÜÀí·½Ê½£¬Îª»º´æµÄ¶ÔÏó·ÖÅäÒ»×échunck£¬ÏàÍ¬SizeµÄChunkºÏ³ÉÒ»×éSlab¡£
  * 
- * åˆå§‹slabè®¾ä¸º100Bï¼Œå¦‚æœç¼“å­˜å¯¹è±¡å°äº100Bï¼Œæ”¾å…¥100B
- * slabï¼Œå¦‚æœå¤§äº100Bï¼Œå°äº 100B * Growth Factor = 1.27 = 127Bï¼Œåˆ™æ”¾å…¥127B slabã€‚
+ * ³õÊ¼slabÉèÎª100B£¬Èç¹û»º´æ¶ÔÏóĞ¡ÓÚ100B£¬·ÅÈë100B
+ * slab£¬Èç¹û´óÓÚ100B£¬Ğ¡ÓÚ 100B * Growth Factor = 1.27 = 127B£¬Ôò·ÅÈë127B slab¡£
  *
  * @param <K>
  * @param <V>
  */
 public class LocalMemCache<K, V> {
-	// ä»¥cache sizeä¸ºkeyï¼Œä»¥chunks mapä¸ºvalue
+	// ÒÔcache sizeÎªkey£¬ÒÔchunks mapÎªvalue
 	ConcurrentSkipListMap<Float, LocalMCSlab> slabs;
 	long initSize;
 	float scale = 1.5f;
@@ -45,7 +45,7 @@ public class LocalMemCache<K, V> {
 		
 		
 		if ((entry = slabs.tailMap(theSize).firstEntry()) == null) {
-			// å¦‚æœæ¯”è¿™ä¸ªcache sizeå¤§å¾—çš„slabä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºä¸€ä¸ª
+			// Èç¹û±ÈÕâ¸öcache size´óµÃµÄslab²»´æÔÚ£¬Ôò´´½¨Ò»¸ö
 			Float floorKey = slabs.floorKey(theSize);
 			float needSize = floorKey == null ? theSize : floorKey * scale;
 
@@ -58,8 +58,8 @@ public class LocalMemCache<K, V> {
 			slabs.put(needSize, slab);
 			return true;
 		} else {
-			// å¦åˆ™ï¼Œåœ¨å¤§çº¦cache sizeçš„slabä¸­æ‰¾ä¸€ä¸ªæœ€å°çš„slab
-			// å½“å½“å‰å…¨éƒ¨cache size + è¿™ä¸ªç¼“å­˜çš„size > åˆ†é…ç»™æ•´ä¸ªcacheçš„initSizeæ—¶ï¼Œåˆ™éœ€ä½¿ç”¨LRUç­–ç•¥
+			// ·ñÔò£¬ÔÚ´óÔ¼cache sizeµÄslabÖĞÕÒÒ»¸ö×îĞ¡µÄslab
+			// µ±µ±Ç°È«²¿cache size + Õâ¸ö»º´æµÄsize > ·ÖÅä¸øÕû¸öcacheµÄinitSizeÊ±£¬ÔòĞèÊ¹ÓÃLRU²ßÂÔ
 			boolean isLRU = getCurrentTotalCacheSize() + theSize > initSize;
 			entry.getValue().put(key, value, isLRU);
 			return true;
