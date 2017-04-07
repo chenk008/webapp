@@ -89,6 +89,9 @@ public class MultiplexerTimeServer implements Runnable {
 				// Accept the new connection
 				ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
 				SocketChannel sc = ssc.accept();
+				//非阻塞模式下，write()方法在尚未写出任何内容时可能就返回了
+				//非阻塞模式下,read()方法在尚未读取到任何数据时可能就返回了
+				//在非阻塞模式下，此时调用connect()，该方法可能在连接建立之前就返回了
 				sc.configureBlocking(false);
 				// Add the new connection to the selector
 				sc.register(selector, SelectionKey.OP_READ);
@@ -109,7 +112,7 @@ public class MultiplexerTimeServer implements Runnable {
 					doWrite(sc, currentTime);
 				} else if (readBytes < 0) {
 					// 对端链路关闭
-					key.cancel();
+					key.cancel();	
 					sc.close();
 				} else
 					; // 读到0字节，忽略

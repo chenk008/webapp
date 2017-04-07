@@ -110,6 +110,13 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>4.3.5.RELEASE</version>
 		</dependency>
+		
+		
+		<dependency>
+			<groupId>net.openhft</groupId>
+			<artifactId>chronicle-map</artifactId>
+			<version>3.12.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>webapp</finalName>
@@ -128,14 +135,14 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.2.8.v20150217</version>
 			</plugin>
-			<plugin>  
-                <groupId>org.apache.maven.plugins</groupId>  
-                <artifactId>maven-eclipse-plugin</artifactId>  
-                <version>2.9</version>  
-                <configuration>  
-                    <downloadSources>true</downloadSources>  
-                </configuration>  
-            </plugin> 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+				</configuration>
+			</plugin>
 			<!-- jmh -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
