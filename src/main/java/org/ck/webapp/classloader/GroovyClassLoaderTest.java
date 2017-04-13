@@ -2,6 +2,7 @@ package org.ck.webapp.classloader;
 
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.Script;
+import shaded.org.apache.commons.io.IOUtils;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -33,6 +34,8 @@ public class GroovyClassLoaderTest {
 			script.run();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally{
+			IOUtils.closeQuietly(loader);
 		}
 	}
 
