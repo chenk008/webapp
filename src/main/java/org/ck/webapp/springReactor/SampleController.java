@@ -3,6 +3,7 @@ package org.ck.webapp.springReactor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 @Controller
 @EnableAutoConfiguration
+@SpringBootApplication(scanBasePackages = "org.ck.webapp.springReactor")
 public class SampleController {
 
 	@RequestMapping("/")
@@ -24,14 +26,15 @@ public class SampleController {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleController.class, "--debug");
+//		SpringApplication.run(SampleController.class, "--debug");
+		SpringApplication.run(SampleController.class, args);
 	}
 
 	private final MyReactiveLibrary reactiveLibrary;
 
-	public ExampleController(@Autowired MyReactiveLibrary reactiveLibrary) {
-	     this.reactiveLibrary = reactiveLibrary;
-	  }
+	public SampleController(@Autowired MyReactiveLibrary reactiveLibrary) {
+		this.reactiveLibrary = reactiveLibrary;
+	}
 
 	@RequestMapping("hello/{who}")
 	@ResponseBody
@@ -43,7 +46,7 @@ public class SampleController {
 	@ResponseBody
 	public Flux<String> hey(@RequestBody Mono<Sir> body) {
 		return Mono.just("Hey mister ").concatWith(
-				body.flatMap(sir -> Flux.fromArray(sir.getLastName().split(""))).map(String::toUpperCase).take(1))
+				body.flatMapMany(sir -> Flux.fromArray(sir.getLastName().split(""))).map(String::toUpperCase).take(1))
 				.concatWith(Mono.just(". how are you?"));
 	}
 }

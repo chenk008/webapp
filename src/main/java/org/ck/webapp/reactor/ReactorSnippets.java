@@ -1,5 +1,6 @@
 package org.ck.webapp.reactor;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ReactorSnippets {
 	}
 
 	public static void findingMissingLetter() {
-		Flux<String> manyLetters = Flux.fromIterable(words).flatMap(word -> Flux.fromArray(word.split(""))).distinct().
+		Flux<String> manyLetters = Flux.fromIterable(words).flatMap(word -> Flux.fromArray(word.split(""))).distinct()
 				.sort()
 				.zipWith(Flux.range(1, Integer.MAX_VALUE), (string, count) -> String.format("%2d. %s", count, string));
 
@@ -41,20 +42,20 @@ public class ReactorSnippets {
 	}
 
 	public static void shortCircuit() {
-		Flux<String> helloPauseWorld = Mono.just("Hello").concatWith(Mono.just("world").delaySubscriptionMillis(500));
+		Flux<String> helloPauseWorld = Mono.just("Hello").concatWith(Mono.just("world").delaySubscription(Duration.ofMillis(500)));
 
 		helloPauseWorld.subscribe(System.out::println);
 	}
 
 	public static void blocks() {
-		Flux<String> helloPauseWorld = Mono.just("Hello").concatWith(Mono.just("world").delaySubscriptionMillis(500));
+		Flux<String> helloPauseWorld = Mono.just("Hello").concatWith(Mono.just("world").delaySubscription(Duration.ofMillis(500)));
 
 		helloPauseWorld.toStream().forEach(System.out::println);
 	}
 
 	public static void firstEmitting() {
-		Mono<String> a = Mono.just("oops I'm late").delaySubscriptionMillis(450);
-		Flux<String> b = Flux.just("let's get", "the party", "started").delayMillis(400);
+		Mono<String> a = Mono.just("oops I'm late").delaySubscription(Duration.ofMillis(450));
+		Flux<String> b = Flux.just("let's get", "the party", "started").delaySubscription(Duration.ofMillis(400));
 
 		Flux.firstEmitting(a, b).toIterable().forEach(System.out::println);
 	}
