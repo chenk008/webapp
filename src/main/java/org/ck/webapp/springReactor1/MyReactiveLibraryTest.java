@@ -31,7 +31,6 @@ public class MyReactiveLibraryTest {
 
 	@PreDestroy
 	public void beanDestroy() {
-		say();
 		System.out.println("close MyReactiveLibraryTest");
 	}
 }
