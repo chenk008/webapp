@@ -1,9 +1,14 @@
 package org.ck.webapp.springReactor;
 
+import org.ck.webapp.springReactor1.MyReactiveLibraryTest;
+import org.ck.webapp.springReactor1.SpringSubContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +32,9 @@ public class SampleController {
 
 	public static void main(String[] args) throws Exception {
 //		SpringApplication.run(SampleController.class, "--debug");
-		SpringApplication.run(SampleController.class, args);
+		ConfigurableApplicationContext rootContext = SpringApplication.run(SampleController.class, args);
+		SpringSubContext.testSubContext(rootContext);
+		System.gc();
 	}
 
 	private final MyReactiveLibrary reactiveLibrary;
