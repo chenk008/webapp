@@ -21,6 +21,8 @@ public class SpringSubContext {
 		Class<?> targetClass = classLoader.loadClass("org.ck.webapp.springReactor1.MyReactiveLibraryTest");
 		Method targetMethod = targetClass.getMethod("say");
 		targetMethod.invoke(context.getBean(targetClass));
+		
+		ThreadUtils.getInheritedAccessControlContext();
 
 		rootContext.getBean(MyReactiveLibrary.class).say();
 		context.close();

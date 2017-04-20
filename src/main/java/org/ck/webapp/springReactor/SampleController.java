@@ -31,9 +31,10 @@ public class SampleController {
 	}
 
 	public static void main(String[] args) throws Exception {
-//		SpringApplication.run(SampleController.class, "--debug");
+		// SpringApplication.run(SampleController.class, "--debug");
 		ConfigurableApplicationContext rootContext = SpringApplication.run(SampleController.class, args);
 		SpringSubContext.testSubContext(rootContext);
+		Thread.sleep(5000);
 		System.gc();
 	}
 
