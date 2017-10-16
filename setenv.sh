@@ -1,0 +1,47 @@
+export CPU_COUNT="$(grep -c 'cpu[0-9][0-9]*' /proc/stat)"
+MIDDLEWARE_LOGS="${HOME}/logs"
+
+
+--jdk7
+CATALINA_OPTS="-server"
+CATALINA_OPTS="${CATALINA_OPTS} -Xms3500m -Xmx3500m"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:PermSize=256m -XX:MaxPermSize=256m"
+CATALINA_OPTS="${CATALINA_OPTS} -Xmn1700m"
+CATALINA_OPTS="${CATALINA_OPTS} -Xss1024k"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:MaxDirectMemorySize=1g"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:SurvivorRatio=10"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+DisableExplicitGC"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+UseConcMarkSweepGC -XX:+UseCMSCompactAtFullCollection -XX:CMSMaxAbortablePrecleanTime=5000"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+CMSClassUnloadingEnabled -XX:CMSInitiatingOccupancyFraction=80 -XX:+UseCMSInitiatingOccupancyOnly"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+ExplicitGCInvokesConcurrent -Dsun.rmi.dgc.client.gcInterval=72000000"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:ParallelGCThreads=${CPU_COUNT}"
+CATALINA_OPTS="${CATALINA_OPTS} -Xloggc:${MIDDLEWARE_LOGS}/gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${MIDDLEWARE_LOGS}/java.hprof"
+CATALINA_OPTS="${CATALINA_OPTS} -Djava.awt.headless=true"
+CATALINA_OPTS="${CATALINA_OPTS} -Dsun.net.client.defaultConnectTimeout=10000"
+CATALINA_OPTS="${CATALINA_OPTS} -Dsun.net.client.defaultReadTimeout=30000"
+CATALINA_OPTS="${CATALINA_OPTS} -DJM.LOG.PATH=${MIDDLEWARE_LOGS}"
+CATALINA_OPTS="${CATALINA_OPTS} -Dfile.encoding=UTF-8"
+CATALINA_OPTS="${CATALINA_OPTS} -Ddruid.filters=mergeStat -Ddruid.useGloalDataSourceStat=true"
+export CATALINA_OPTS
+
+
+--jdk8
+CATALINA_OPTS="-server"
+CATALINA_OPTS="${CATALINA_OPTS} -Xms3500m -Xmx3500m"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:PermSize=256m -XX:MaxPermSize=256m"
+CATALINA_OPTS="${CATALINA_OPTS} -Xss1024k"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:MaxDirectMemorySize=1g"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+DisableExplicitGC"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+UseG1GC -XX:CMSMaxAbortablePrecleanTime=5000"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+ExplicitGCInvokesConcurrent -Dsun.rmi.dgc.client.gcInterval=72000000"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:ParallelGCThreads=${CPU_COUNT}"
+CATALINA_OPTS="${CATALINA_OPTS} -Xloggc:${MIDDLEWARE_LOGS}/gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps"
+CATALINA_OPTS="${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${MIDDLEWARE_LOGS}/java.hprof"
+CATALINA_OPTS="${CATALINA_OPTS} -Djava.awt.headless=true"
+CATALINA_OPTS="${CATALINA_OPTS} -Dsun.net.client.defaultConnectTimeout=10000"
+CATALINA_OPTS="${CATALINA_OPTS} -Dsun.net.client.defaultReadTimeout=30000"
+CATALINA_OPTS="${CATALINA_OPTS} -DJM.LOG.PATH=${MIDDLEWARE_LOGS}"
+CATALINA_OPTS="${CATALINA_OPTS} -Dfile.encoding=UTF-8"
+CATALINA_OPTS="${CATALINA_OPTS} -Ddruid.filters=mergeStat -Ddruid.useGloalDataSourceStat=true"
+export CATALINA_OPTS

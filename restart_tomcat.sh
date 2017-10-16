@@ -1,10 +1,11 @@
 #!/bin/sh
 
 TOMCAT_HOME=/home/admin/apps/tomcat/admin
+APP_NAME=test
 SHUTDOWN_WAIT=5
 
 tomcat_pid() {
-  echo `ps aux | grep org.apache.catalina.startup.Bootstrap | grep -v grep | awk '{ print $2 }'`
+  echo `ps aux | grep org.apache.catalina.startup.Bootstrap | grep ${APP_NAME} | grep -v grep | awk '{ print $2 }'`
 }
 
 start() {
