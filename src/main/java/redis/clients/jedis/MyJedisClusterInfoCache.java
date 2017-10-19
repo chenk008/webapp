@@ -49,7 +49,7 @@ public class MyJedisClusterInfoCache {
 	}
 
 	/**
-	 * ��ʼ����ʱ�򣬸��½ڵ���Ϣ��slot��Ϣ
+	 * 初始化的时候，更新节点信息和slot信息
 	 * 
 	 * @param jedis
 	 */
@@ -93,7 +93,7 @@ public class MyJedisClusterInfoCache {
 	}
 
 	/**
-	 * ���¹���slot��Ϣ
+	 * 重新构造slot信息
 	 * 
 	 * @param jedis
 	 */
@@ -135,7 +135,7 @@ public class MyJedisClusterInfoCache {
 	}
 
 	/**
-	 * ���¹���slot��Ϣ��ֻʹ����master��Ϣ
+	 * 重新构造slot信息，只使用了master信息
 	 * 
 	 * @param jedis
 	 */
@@ -245,7 +245,7 @@ public class MyJedisClusterInfoCache {
 	}
 
 	/**
-	 * ����slot��slave��Ϣ
+	 * 设置slot的slave信息
 	 * 
 	 * @param targetSlots
 	 * @param targetNode

@@ -12,7 +12,7 @@ public class RedisClusterTest {
 
 	public static void main(String[] args) throws IOException {
 		Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
-		// 只需要添加一个实例，jedis会自动发现集群中其它节点
+		// 鍙渶瑕佹坊鍔犱竴涓疄渚嬶紝jedis浼氳嚜鍔ㄥ彂鐜伴泦缇や腑鍏跺畠鑺傜偣
 		jedisClusterNodes.add(new HostAndPort("127.0.0.1", 7000));
 		MyBinaryJedisCluster jc = new MyBinaryJedisCluster(jedisClusterNodes);
 

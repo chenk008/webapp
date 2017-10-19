@@ -15,6 +15,8 @@ public class PhaserForResetableCountDownLatch {
 
 	private static AtomicInteger ai = new AtomicInteger(0);
 
+	private static AtomicInteger park = new AtomicInteger(0);
+
 	public static void main(String[] args) {
 		ExecutorService executorService = Executors.newFixedThreadPool(3);
 
@@ -22,7 +24,11 @@ public class PhaserForResetableCountDownLatch {
 		TaskFetcherThread t = new TaskFetcherThread();
 
 		Phaser phaser = new Phaser(0) {
-			protected boolean onAdvance(int phase, int registeredParties) {
+			protected synchronized boolean onAdvance(int phase, int registeredParties) {
+
+				// 可能会重复unpark
+				LockSupport.unpark(t);
+				System.out.println("unpark:" + ai.incrementAndGet());
 
 				System.out.println(Thread.currentThread().getName() + "执行onAdvance方法.....;phase:" + phase
 						+ "registeredParties=" + registeredParties);
@@ -35,6 +41,7 @@ public class PhaserForResetableCountDownLatch {
 		t.setPhaser(phaser);
 		t.start();
 
+		submitAll(3, executorService, phaser);
 	}
 
 	private static class TaskFetcherThread extends Thread {
@@ -54,16 +61,22 @@ public class PhaserForResetableCountDownLatch {
 		public void run() {
 			while (true) {
 				try {
+					System.out.println("wait:" + ai.get());
+
+					// 多线程竞争下，同时对同一个线程执行多次unpark和park，可能导致无法unpark
+					LockSupport.park();
+
 					// 必须先取得phase，再提交执行任务，再wait
 					int phase = phaser.getPhase();
 					int randomNum = ThreadLocalRandom.current().nextInt(1, 3 + 1);
 					submitAll(randomNum, executorService, phaser);
 
 					// 测试异常情况会导致phase重复的场景，结果依然可以运行，就是会导致 重复的phase 和 下个phase 合并成一个phase，任务数变多
-					if (randomNum == 2) {
-						throw new RuntimeException("sdfsd");
-					}
-					phaser.awaitAdvance(phase);
+					// if (randomNum == 2) {
+					// throw new RuntimeException("sdfsd");
+					// }
+					// phaser.awaitAdvance(phase);
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -74,7 +87,7 @@ public class PhaserForResetableCountDownLatch {
 	}
 
 	private static void submitAll(int num, ExecutorService executorService, final Phaser phaser) {
-		System.out.println("start:" + phaser.getPhase() + ":" + num);
+		 System.out.println("start:" + phaser.getPhase() + ":" + num);
 
 		for (int i = 0; i < num; i++) {
 			phaser.register();

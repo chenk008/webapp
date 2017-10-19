@@ -162,7 +162,7 @@ public abstract class MyJedisClusterCommand<T> {
 		} catch (JedisRedirectionException jre) {
 			// if MOVED redirection occurred,
 			if (jre instanceof JedisMovedDataException) {
-				//·¢ÉúmoveÃüÁî£¬slot´íÎó
+				//å‘ç”Ÿmoveå‘½ä»¤ï¼Œsloté”™è¯¯
 
 				
 				// it rebuilds cluster's slot cache

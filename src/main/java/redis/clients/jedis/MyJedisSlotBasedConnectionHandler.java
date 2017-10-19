@@ -60,14 +60,14 @@ public class MyJedisSlotBasedConnectionHandler implements Closeable {
 	}
 
 	/**
-	 * ÖØĞÂÀ­È¡slotĞÅÏ¢£¨ÒòÎªÁ¬½ÓÊ§°Ü£¬»òÕß»ñÈ¡²»µ½slotµÄÁ¬½Ó£©
+	 * é‡æ–°æ‹‰å–slotä¿¡æ¯ï¼ˆå› ä¸ºè¿æ¥å¤±è´¥ï¼Œæˆ–è€…è·å–ä¸åˆ°slotçš„è¿æ¥ï¼‰
 	 */
 	public void renewSlotCache() {
 		cache.renewClusterSlots(null);
 	}
 
 	/**
-	 * µ±·¢ÉúJedisMovedDataExceptionµÄÊ±ºò
+	 * å½“å‘ç”ŸJedisMovedDataExceptionçš„æ—¶å€™
 	 * 
 	 * @param jedis
 	 */
@@ -135,7 +135,7 @@ public class MyJedisSlotBasedConnectionHandler implements Closeable {
 	}
 
 	/**
-	 * ´Óslave½ÚµãÈ¡Êı¾İ
+	 * ä»slaveèŠ‚ç‚¹å–æ•°æ®
 	 * @param slot
 	 * @return
 	 */
