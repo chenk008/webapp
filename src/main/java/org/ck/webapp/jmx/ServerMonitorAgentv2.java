@@ -12,7 +12,7 @@ import javax.management.remote.JMXConnectorServerFactory;
 import javax.management.remote.JMXServiceURL;
 
 /**
- * Server¶Ë
+ * Serverç«¯
  * 
  * @author ck
  *
@@ -21,10 +21,10 @@ public class ServerMonitorAgentv2 {
 
 	public static void main(String[] args) throws Exception {
 		// MBeanServer server=MBeanServerFactory.createMBeanServer();
-		// //²»¿ÉÔÚjconsoleÖĞÊ¹ÓÃ
-		MBeanServer server = ManagementFactory.getPlatformMBeanServer();// ¿ÉÔÚjconsoleÖĞÊ¹ÓÃ
+		// //ä¸å¯åœ¨jconsoleä¸­ä½¿ç”¨
+		MBeanServer server = ManagementFactory.getPlatformMBeanServer();// å¯åœ¨jconsoleä¸­ä½¿ç”¨
 
-		// Ö¸¶¨¶Ë¿Ú
+		// æŒ‡å®šç«¯å£
 		LocateRegistry.createRegistry(1098);
 		JMXServiceURL url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://127.0.0.1:" + 1098 + "/myJmx");
 		Map<String, Object> env = new HashMap<String, Object>();
@@ -36,7 +36,7 @@ public class ServerMonitorAgentv2 {
 		JMXConnectorServer cntorServer = JMXConnectorServerFactory.newJMXConnectorServer(url, env, server);
 		cntorServer.start();
 
-		// ±»¹ÜÀíµÄbean,"com.jmx"°üÃûÈÎÒâÈ¡£¬¿ÉÒÔ¶à¸öBean
+		// è¢«ç®¡ç†çš„bean,"com.jmx"åŒ…åä»»æ„å–ï¼Œå¯ä»¥å¤šä¸ªBean
 		ObjectName monitorName = new ObjectName("com.jmx:type=ServerMonitor");
 		server.registerMBean(new ServerMonitor(), monitorName);
 	}

@@ -12,7 +12,7 @@ import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 
 /**
- * ½â¾ö·Ö°ü¡¢Õ³°üµÄÎÊÌâ
+ * è§£å†³åˆ†åŒ…ã€ç²˜åŒ…çš„é—®é¢˜
  * 
  * @author viruser
  *
@@ -20,20 +20,20 @@ import io.netty.handler.codec.string.StringDecoder;
 public class TimeServer {
 
 	public void bind(int port) throws Exception {
-		// ÅäÖÃ·şÎñ¶ËµÄNIOÏß³Ì×é
+		// é…ç½®æœåŠ¡ç«¯çš„NIOçº¿ç¨‹ç»„
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
 			ServerBootstrap b = new ServerBootstrap();
 			b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1024)
 					.childHandler(new ChildChannelHandler());
-			// °ó¶¨¶Ë¿Ú£¬Í¬²½µÈ´ı³É¹¦
+			// ç»‘å®šç«¯å£ï¼ŒåŒæ­¥ç­‰å¾…æˆåŠŸ
 			ChannelFuture f = b.bind(port).sync();
 
-			// µÈ´ı·şÎñ¶Ë¼àÌı¶Ë¿Ú¹Ø±Õ
+			// ç­‰å¾…æœåŠ¡ç«¯ç›‘å¬ç«¯å£å…³é—­
 			f.channel().closeFuture().sync();
 		} finally {
-			// ÓÅÑÅÍË³ö£¬ÊÍ·ÅÏß³Ì³Ø×ÊÔ´
+			// ä¼˜é›…é€€å‡ºï¼Œé‡Šæ”¾çº¿ç¨‹æ± èµ„æº
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
@@ -42,9 +42,9 @@ public class TimeServer {
 	private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 		@Override
 		protected void initChannel(SocketChannel arg0) throws Exception {
-			//ÒÔ»»ĞĞ·ûÎª½áÊø±êÖ¾µÄ½âÂëÆ÷
+			//ä»¥æ¢è¡Œç¬¦ä¸ºç»“æŸæ ‡å¿—çš„è§£ç å™¨
 			arg0.pipeline().addLast(new LineBasedFrameDecoder(1024));
-			//½«¶ÔÏó×ª»»³É×Ö·û´®µÄ½âÂëÆ÷	
+			//å°†å¯¹è±¡è½¬æ¢æˆå­—ç¬¦ä¸²çš„è§£ç å™¨	
 			arg0.pipeline().addLast(new StringDecoder());
 			arg0.pipeline().addLast(new TimeServerHandler());
 		}
@@ -60,7 +60,7 @@ public class TimeServer {
 			try {
 				port = Integer.valueOf(args[0]);
 			} catch (NumberFormatException e) {
-				// ²ÉÓÃÄ¬ÈÏÖµ
+				// é‡‡ç”¨é»˜è®¤å€¼
 			}
 		}
 		new TimeServer().bind(port);

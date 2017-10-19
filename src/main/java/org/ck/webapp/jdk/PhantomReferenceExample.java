@@ -8,62 +8,62 @@ public class PhantomReferenceExample {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		// 1.´´½¨ÒıÓÃ¶ÓÁĞReferenceQueue
+		// 1.åˆ›å»ºå¼•ç”¨é˜Ÿåˆ—ReferenceQueue
 		ReferenceQueue queue = new ReferenceQueue();
-		System.out.println("1.È·ÈÏ[ÒıÓÃ¶ÓÁĞ]£º" + queue + "\n");
+		System.out.println("1.ç¡®è®¤[å¼•ç”¨é˜Ÿåˆ—]ï¼š" + queue + "\n");
 
-		// 2.ÒıÓÃÄ¿±ê
+		// 2.å¼•ç”¨ç›®æ ‡
 		ReferenceTarget referenceTarget = new ReferenceTarget();
-		System.out.println("2.È·ÈÏ[ÒıÓÃÄ¿±ê]£º" + referenceTarget + "\n");
+		System.out.println("2.ç¡®è®¤[å¼•ç”¨ç›®æ ‡]ï¼š" + referenceTarget + "\n");
 
-		// 3.´´½¨Ò»¸öĞéÒıÓÃ£¬ÓÉ¹¹Ôìº¯ÊıÉèÖÃÒ»¸öÒıÓÃÄ¿±ê£¬²¢°ó¶¨Ò»¸öÒıÓÃ¶ÓÁĞ
+		// 3.åˆ›å»ºä¸€ä¸ªè™šå¼•ç”¨ï¼Œç”±æ„é€ å‡½æ•°è®¾ç½®ä¸€ä¸ªå¼•ç”¨ç›®æ ‡ï¼Œå¹¶ç»‘å®šä¸€ä¸ªå¼•ç”¨é˜Ÿåˆ—
 		Reference phantomReference = new PhantomReference(referenceTarget,
 				queue);
-		System.out.println("3.È·ÈÏ[ĞéÒıÓÃ]: " + phantomReference + "\n");
+		System.out.println("3.ç¡®è®¤[è™šå¼•ç”¨]: " + phantomReference + "\n");
 
-		// 4.È·ÈÏÒıÓÃÄ¿±ê
+		// 4.ç¡®è®¤å¼•ç”¨ç›®æ ‡
 		referenceTarget = null;
-		System.out.println("4.´Ó[ĞéÒıÓÃ]ÖĞÈ·ÈÏ[ÒıÓÃÄ¿±ê]£º" + phantomReference.get()
-				+ "£¬Êµ¼ÊÉÏÕâ¸ö·½·¨ÖÕ¶¼·µ»Ønull\n");
+		System.out.println("4.ä»[è™šå¼•ç”¨]ä¸­ç¡®è®¤[å¼•ç”¨ç›®æ ‡]ï¼š" + phantomReference.get()
+				+ "ï¼Œå®é™…ä¸Šè¿™ä¸ªæ–¹æ³•ç»ˆéƒ½è¿”å›null\n");
 
-		// 5.µÚÒ»´ÎÆô¶¯GC²¢ĞİÏ¢1Ãë
-		System.out.println("5.µÚÒ»´ÎÆô¶¯GC²¢ĞİÏ¢1Ãë\n");
+		// 5.ç¬¬ä¸€æ¬¡å¯åŠ¨GCå¹¶ä¼‘æ¯1ç§’
+		System.out.println("5.ç¬¬ä¸€æ¬¡å¯åŠ¨GCå¹¶ä¼‘æ¯1ç§’\n");
 		System.gc();
 		Thread.sleep(1000);
 
 		try {
-			// 6.Ö´ĞĞÒıÓÃÄ¿±ê¶¨ÒåµÄÖÕ½á·½·¨£¬ÏÖÔÚËüµÄÖÕ½á·½·¨ÒÑ¾­±»ÔËĞĞ¹ıÁË
+			// 6.æ‰§è¡Œå¼•ç”¨ç›®æ ‡å®šä¹‰çš„ç»ˆç»“æ–¹æ³•ï¼Œç°åœ¨å®ƒçš„ç»ˆç»“æ–¹æ³•å·²ç»è¢«è¿è¡Œè¿‡äº†
 			if (ReferenceTarget.class.getDeclaredMethod("finalize") != null)
 				;
-			System.out.println("6.ÒıÓÃÄ¿±ê´æÔÚÒ»¸öfinalize·½·¨£¬²¢±»Ö´ĞĞÁË\n");
+			System.out.println("6.å¼•ç”¨ç›®æ ‡å­˜åœ¨ä¸€ä¸ªfinalizeæ–¹æ³•ï¼Œå¹¶è¢«æ‰§è¡Œäº†\n");
 
-			// 7.µÚÒ»´Î´ÓÒıÓÃ¶ÓÁĞÈ¡³öÒıÓÃ¶ÔÏó
-			System.out.println("7.µÚÒ»´Î´ÓÒıÓÃ¶ÓÁĞÈ¡³öÒıÓÃ¶ÔÏó£º " + queue.poll());
-			System.out.println("µ±Ç°[ÒıÓÃÄ¿±ê]²»ÊÇÒ»¸öÇ¿¿Éµ½´ï¶ÔÏó");
-			System.out.println("µ±Ç°[ÒıÓÃÄ¿±ê]²»ÊÇÒ»¸öÈí¿Éµ½´ï¶ÔÏó");
-			System.out.println("µ±Ç°[ÒıÓÃÄ¿±ê]²»ÊÇÒ»¸öÈõ¿Éµ½´ï¶ÔÏó");
-			System.out.println("µ±Ç°[ÒıÓÃÄ¿±ê]±»Ò»¸ö[ĞéÒıÓÃ]Ëù³ÖÓĞ");
-			System.out.println("µ±Ç°[ÒıÓÃÄ¿±ê]µÄfinalizeÒÑ¾­ÔËĞĞ¹ı\n");
+			// 7.ç¬¬ä¸€æ¬¡ä»å¼•ç”¨é˜Ÿåˆ—å–å‡ºå¼•ç”¨å¯¹è±¡
+			System.out.println("7.ç¬¬ä¸€æ¬¡ä»å¼•ç”¨é˜Ÿåˆ—å–å‡ºå¼•ç”¨å¯¹è±¡ï¼š " + queue.poll());
+			System.out.println("å½“å‰[å¼•ç”¨ç›®æ ‡]ä¸æ˜¯ä¸€ä¸ªå¼ºå¯åˆ°è¾¾å¯¹è±¡");
+			System.out.println("å½“å‰[å¼•ç”¨ç›®æ ‡]ä¸æ˜¯ä¸€ä¸ªè½¯å¯åˆ°è¾¾å¯¹è±¡");
+			System.out.println("å½“å‰[å¼•ç”¨ç›®æ ‡]ä¸æ˜¯ä¸€ä¸ªå¼±å¯åˆ°è¾¾å¯¹è±¡");
+			System.out.println("å½“å‰[å¼•ç”¨ç›®æ ‡]è¢«ä¸€ä¸ª[è™šå¼•ç”¨]æ‰€æŒæœ‰");
+			System.out.println("å½“å‰[å¼•ç”¨ç›®æ ‡]çš„finalizeå·²ç»è¿è¡Œè¿‡\n");
 
-			// 8.µÚ¶ş´ÎÆô¶¯GC²¢ĞİÏ¢1Ãë
-			System.out.println("8.µÚ¶ş´ÎÆô¶¯GC²¢ĞİÏ¢1Ãë" + "\n");
+			// 8.ç¬¬äºŒæ¬¡å¯åŠ¨GCå¹¶ä¼‘æ¯1ç§’
+			System.out.println("8.ç¬¬äºŒæ¬¡å¯åŠ¨GCå¹¶ä¼‘æ¯1ç§’" + "\n");
 
 			System.gc();
 			Thread.sleep(1000);
 
-			// 9.µ±Ç°ÒıÓÃÄ¿±ê±ä³ÉÒ»¸öĞé¿Éµ½´ï¶ÔÏó
-			System.out.println("9.µ±Ç°ÒıÓÃÄ¿±ê±ä³ÉÒ»¸öĞé¿Éµ½´ï¶ÔÏó\n");
+			// 9.å½“å‰å¼•ç”¨ç›®æ ‡å˜æˆä¸€ä¸ªè™šå¯åˆ°è¾¾å¯¹è±¡
+			System.out.println("9.å½“å‰å¼•ç”¨ç›®æ ‡å˜æˆä¸€ä¸ªè™šå¯åˆ°è¾¾å¯¹è±¡\n");
 
-			// 10.µÚ¶ş´Î´ÓÒıÓÃ¶ÓÁĞÈ¡³öÒıÓÃ¶ÔÏó
-			System.out.println("10.µÚ¶ş´Î´ÓÒıÓÃ¶ÓÁĞÈ¡³öÒıÓÃ¶ÔÏó£º" + queue.poll() + "\n");
+			// 10.ç¬¬äºŒæ¬¡ä»å¼•ç”¨é˜Ÿåˆ—å–å‡ºå¼•ç”¨å¯¹è±¡
+			System.out.println("10.ç¬¬äºŒæ¬¡ä»å¼•ç”¨é˜Ÿåˆ—å–å‡ºå¼•ç”¨å¯¹è±¡ï¼š" + queue.poll() + "\n");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			// ×¢£º¿É³¢ÊÔÆÁ±ÎµôReferenceTargetµÄfinalize()·½·¨£¬ÖØĞÂÔËĞĞ´ËÀı×Ó
-			System.out.println("6.Ä¿±ê¶ÔÏóÃ»ÓĞ¶¨Òåfinalize()·½·¨\n");
+			// æ³¨ï¼šå¯å°è¯•å±è”½æ‰ReferenceTargetçš„finalize()æ–¹æ³•ï¼Œé‡æ–°è¿è¡Œæ­¤ä¾‹å­
+			System.out.println("6.ç›®æ ‡å¯¹è±¡æ²¡æœ‰å®šä¹‰finalize()æ–¹æ³•\n");
 
-			// 7.ÒıÓÃÄ¿±ê±ä³ÉÁËĞé¿Éµ½´ï×´Ì¬£¬GCÁ¢¼´°Ñ¸ÃĞéÒıÓÃ¼ÓÈëµ½ÒıÓÃ¶ÓÁĞÖĞ
-			System.out.println("7.µÚÒ»´Î´ÓÒıÓÃ¶ÓÁĞÈ¡³öÒıÓÃ¶ÔÏó£º" + queue.poll() + "\n");
+			// 7.å¼•ç”¨ç›®æ ‡å˜æˆäº†è™šå¯åˆ°è¾¾çŠ¶æ€ï¼ŒGCç«‹å³æŠŠè¯¥è™šå¼•ç”¨åŠ å…¥åˆ°å¼•ç”¨é˜Ÿåˆ—ä¸­
+			System.out.println("7.ç¬¬ä¸€æ¬¡ä»å¼•ç”¨é˜Ÿåˆ—å–å‡ºå¼•ç”¨å¯¹è±¡ï¼š" + queue.poll() + "\n");
 		}
 	}
 
@@ -72,7 +72,7 @@ public class PhantomReferenceExample {
 		@Override
 		protected void finalize() throws Throwable {
 			super.finalize();
-			System.out.println("finalizing¡­¡­");
+			System.out.println("finalizingâ€¦â€¦");
 		}
 
 	}

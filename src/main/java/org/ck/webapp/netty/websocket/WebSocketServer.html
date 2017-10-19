@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="GBK">
-Netty WebSocket Ê±¼ä·şÎñÆ÷
+Netty WebSocket æ—¶é—´æœåŠ¡å™¨
 </head>
 <br>
 <body>
@@ -22,17 +22,17 @@ if (window.WebSocket) {
 	};
 	socket.onopen = function(event) {
 		var ta = document.getElementById('responseText');
-		ta.value = "´ò¿ªWebSocket·şÎñÕı³££¬ä¯ÀÀÆ÷Ö§³ÖWebSocket!";
+		ta.value = "æ‰“å¼€WebSocketæœåŠ¡æ­£å¸¸ï¼Œæµè§ˆå™¨æ”¯æŒWebSocket!";
 	};
 	socket.onclose = function(event) {
 		var ta = document.getElementById('responseText');
 		ta.value = "";
-		ta.value = "WebSocket ¹Ø±Õ!"; 
+		ta.value = "WebSocket å…³é—­!"; 
 	};
 }
 else
 	{
-	alert("±§Ç¸£¬ÄúµÄä¯ÀÀÆ÷²»Ö§³ÖWebSocketĞ­Òé!");
+	alert("æŠ±æ­‰ï¼Œæ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒWebSocketåè®®!");
 	}
 function send(message) {
 	if (!window.WebSocket) { return; }
@@ -41,16 +41,16 @@ function send(message) {
 	}
 	else
 		{
-		  alert("WebSocketÁ¬½ÓÃ»ÓĞ½¨Á¢³É¹¦!");
+		  alert("WebSocketè¿æ¥æ²¡æœ‰å»ºç«‹æˆåŠŸ!");
 		}
 }
 </script>
 <form onsubmit="return false;">
-<input type="text" name="message" value="Netty×î¼ÑÊµ¼ù"/>
+<input type="text" name="message" value="Nettyæœ€ä½³å®è·µ"/>
 <br><br>
-<input type="button" value="·¢ËÍWebSocketÇëÇóÏûÏ¢" onclick="send(this.form.message.value)"/>
+<input type="button" value="å‘é€WebSocketè¯·æ±‚æ¶ˆæ¯" onclick="send(this.form.message.value)"/>
 <hr color="blue"/>
-<h3>·şÎñ¶Ë·µ»ØµÄÓ¦´ğÏûÏ¢</h3>
+<h3>æœåŠ¡ç«¯è¿”å›çš„åº”ç­”æ¶ˆæ¯</h3>
 <textarea id="responseText" style="width:500px;height:300px;"></textarea>
 </form>
 </body>

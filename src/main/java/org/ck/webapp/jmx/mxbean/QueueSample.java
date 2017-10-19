@@ -4,8 +4,8 @@ import java.beans.ConstructorProperties;
 import java.util.Date;
 
 /**
- * ÔÚ QueueSample ÖĞ£¬MXBean¿ò¼Ü»áµ÷ÓÃQueueSampleÖĞµÄËùÓĞgetters£¬²¢½«·µ»ØµÄÊµÀı×ª»¯ÎªÒ»¸ö CompositeData
- * ÊµÀı£¬È»ºóÊ¹ÓÃ@ConstructorProperties×¢½â ´ÓÒ»¸öCompositeDataÊµÀıÖĞÖØ¹¹Ò»¸ö QueueSample ÊµÀı¡£
+ * åœ¨ QueueSample ä¸­ï¼ŒMXBeanæ¡†æ¶ä¼šè°ƒç”¨QueueSampleä¸­çš„æ‰€æœ‰gettersï¼Œå¹¶å°†è¿”å›çš„å®ä¾‹è½¬åŒ–ä¸ºä¸€ä¸ª CompositeData
+ * å®ä¾‹ï¼Œç„¶åä½¿ç”¨@ConstructorPropertiesæ³¨è§£ ä»ä¸€ä¸ªCompositeDataå®ä¾‹ä¸­é‡æ„ä¸€ä¸ª QueueSample å®ä¾‹ã€‚
  * 
  * @author viruser
  *

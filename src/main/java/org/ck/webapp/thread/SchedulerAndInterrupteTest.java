@@ -12,7 +12,7 @@ public class SchedulerAndInterrupteTest {
 	}
 
 	/**
-	 * wait的任务，interrupt之后会产生interrupt异常，但是任务也会移除掉
+	 * wait鐨勪换鍔★紝interrupt涔嬪悗浼氫骇鐢焛nterrupt寮傚父锛屼絾鏄换鍔′篃浼氱Щ闄ゆ帀
 	 * 
 	 * @throws InterruptedException
 	 */
@@ -40,7 +40,7 @@ public class SchedulerAndInterrupteTest {
 	}
 
 	/**
-	 * 无限循环的方法，如果使用interrupt，需要增加Thread.interrupted()判断，但是interrupt时任务已经移除掉
+	 * 鏃犻檺寰幆鐨勬柟娉曪紝濡傛灉浣跨敤interrupt锛岄渶瑕佸鍔燭hread.interrupted()鍒ゆ柇锛屼絾鏄痠nterrupt鏃朵换鍔″凡缁忕Щ闄ゆ帀
 	 * 
 	 * @throws InterruptedException
 	 */
@@ -68,7 +68,7 @@ public class SchedulerAndInterrupteTest {
 	}
 
 	/**
-	 * 当前不运行的任务，cancel的时候不会去执行interrupt
+	 * 褰撳墠涓嶈繍琛岀殑浠诲姟锛宑ancel鐨勬椂鍊欎笉浼氬幓鎵цinterrupt
 	 * 
 	 * @throws InterruptedException
 	 */

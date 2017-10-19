@@ -10,10 +10,10 @@ public class UnloadClassTest {
 			classLoaded = null;
 			classLoader = null;
 
-			System.out.println("开始GC");
-			//卸载class，需要classloader实例可以卸载
+			System.out.println("寮�濮婫C");
+			//鍗歌浇class锛岄渶瑕乧lassloader瀹炰緥鍙互鍗歌浇
 			System.gc();
-			System.out.println("GC完成");
+			System.out.println("GC瀹屾垚");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

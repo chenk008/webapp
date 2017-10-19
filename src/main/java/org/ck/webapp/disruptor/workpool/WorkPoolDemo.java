@@ -17,11 +17,11 @@ import com.lmax.disruptor.dsl.ProducerType;
 /**
  * Created by hll on 2016/8/1.
  * 
- * ¶àÏß³ÌÉú²ú¡¢¶àÏß³ÌÏû·Ñ
+ * å¤šçº¿ç¨‹ç”Ÿäº§ã€å¤šçº¿ç¨‹æ¶ˆè´¹
  */
 public class WorkPoolDemo {
 	public static void main(String[] args) {
-		// Ïû·ÑÏß³Ì³Ø
+		// æ¶ˆè´¹çº¿ç¨‹æ± 
 		ExecutorService executorService = Executors.newFixedThreadPool(3, new ThreadFactory() {
 
 			@Override
@@ -34,7 +34,7 @@ public class WorkPoolDemo {
 		Disruptor<OrderEvent> disruptor = new Disruptor<>(eventFactory, 1024 * 1024, executorService,
 				ProducerType.MULTI, new YieldingWaitStrategy());
 
-		// Ã¿Ò»¸öMyWorkHandler¶¼ÊÇÒ»¸öÏû·ÑÏß³Ì
+		// æ¯ä¸€ä¸ªMyWorkHandleréƒ½æ˜¯ä¸€ä¸ªæ¶ˆè´¹çº¿ç¨‹
 		EventHandlerGroup<OrderEvent> handleEventsWithWorkerPool = disruptor.handleEventsWithWorkerPool(
 				new MyWorkHandler("ID-1"), new MyWorkHandler("ID-2"), new MyWorkHandler("ID-3"));
 		disruptor.start();

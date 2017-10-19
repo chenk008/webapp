@@ -6,7 +6,7 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 /**
- * ÔËĞĞÏÂÃæ³ÌĞò£¬¾Í¿ÉÒÔÓÃjconsole½øĞĞ±¾µØÁ¬½ÓÁË
+ * è¿è¡Œä¸‹é¢ç¨‹åºï¼Œå°±å¯ä»¥ç”¨jconsoleè¿›è¡Œæœ¬åœ°è¿æ¥äº†
  * 
  * @author ck
  *
@@ -14,12 +14,12 @@ import javax.management.ObjectName;
 public class ServerMonitorAgent {
 	public static void main(String[] args) throws Exception {
 		// MBeanServer server=MBeanServerFactory.createMBeanServer();
-		// //²»¿ÉÔÚjconsoleÖĞÊ¹ÓÃ
-		MBeanServer server = ManagementFactory.getPlatformMBeanServer();// ¿ÉÔÚjconsoleÖĞÊ¹ÓÃ
-		// ±»¹ÜÀíµÄbean,"com.jmx"°üÃûÈÎÒâÈ¡
+		// //ä¸å¯åœ¨jconsoleä¸­ä½¿ç”¨
+		MBeanServer server = ManagementFactory.getPlatformMBeanServer();// å¯åœ¨jconsoleä¸­ä½¿ç”¨
+		// è¢«ç®¡ç†çš„bean,"com.jmx"åŒ…åä»»æ„å–
 		ObjectName monitorName = new ObjectName("com.jmx:type=ServerMonitorImpl");
 		server.registerMBean(new ServerMonitor(), monitorName);
-		// ±ØĞëÈ·±£Ïß³Ì»î×Å
+		// å¿…é¡»ç¡®ä¿çº¿ç¨‹æ´»ç€
 		Thread.sleep(Long.MAX_VALUE);
 	}
 }

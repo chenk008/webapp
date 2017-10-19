@@ -14,7 +14,7 @@ public class VehicalProxy {
 	public IVehical create() {
 		final Class<?>[] interfaces = new Class[] { IVehical.class };
 		final VehicalInvacationHandler handler = new VehicalInvacationHandler(vehical);
-		// 创建代理对象
+		// 鍒涘缓浠ｇ悊瀵硅薄
 		return (IVehical) Proxy.newProxyInstance(IVehical.class.getClassLoader(), interfaces, handler);
 	}
 

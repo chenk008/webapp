@@ -8,9 +8,9 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 
 /**
- * ÒÔÔöĞòĞÎÊ½Êä³ö¾­¹ıÅÅĞòµÄÕûÊıÁĞ±í¡£
+ * ä»¥å¢åºå½¢å¼è¾“å‡ºç»è¿‡æ’åºçš„æ•´æ•°åˆ—è¡¨ã€‚
 
- * Ó²ÅÌÅÅĞò·¨ Ê×ÏÈ½«Êı¾İ·Ö³Én·İ£¬Èç1-249999ÊÇµÚÒ»·İ£¬250000µ½499999ÊÇµÚ¶ş·İ£¬ÒÔ´ËÀàÍÆ£¬È»ºó¶ÔÃ¿Ò»·İÎÄ¼şÓÃÏµÍ³ÅÅĞò£¬È»ºó°ÑËüÊä³ö¡£
+ * ç¡¬ç›˜æ’åºæ³• é¦–å…ˆå°†æ•°æ®åˆ†æˆnä»½ï¼Œå¦‚1-249999æ˜¯ç¬¬ä¸€ä»½ï¼Œ250000åˆ°499999æ˜¯ç¬¬äºŒä»½ï¼Œä»¥æ­¤ç±»æ¨ï¼Œç„¶åå¯¹æ¯ä¸€ä»½æ–‡ä»¶ç”¨ç³»ç»Ÿæ’åºï¼Œç„¶åæŠŠå®ƒè¾“å‡ºã€‚
  * 
  * @author viruser
  *
@@ -36,8 +36,8 @@ public class BitSort2 {
 
 	}
 
-	public final static int SIZE = 10000000; // ×Ü´óĞ¡
-	public final static int TIMES = 40; // ´ÎÊı
+	public final static int SIZE = 10000000; // æ€»å¤§å°
+	public final static int TIMES = 40; // æ¬¡æ•°
 	public final static int UNIT = SIZE / TIMES;
 
 	void fun(String inputName, String outputName) {

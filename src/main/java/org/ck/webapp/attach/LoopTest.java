@@ -6,7 +6,7 @@ import java.lang.management.RuntimeMXBean;
 public class LoopTest {
 
 	/**
-	 * java runtime相关的jmx信息
+	 * java runtime鐩稿叧鐨刯mx淇℃伅
 	 * @param args
 	 * @throws InterruptedException
 	 */

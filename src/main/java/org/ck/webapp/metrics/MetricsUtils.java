@@ -28,28 +28,28 @@ public class MetricsUtils {
 		// BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
 
 		final ConsoleReporter reporter = ConsoleReporter.forRegistry(METRIC_REGISTRY)
-				//meter£¬timerÍ³¼ÆÆµÂÊµÄµ¥Î»
+				//meterï¼Œtimerç»Ÿè®¡é¢‘ç‡çš„å•ä½
 				.convertRatesTo(TimeUnit.SECONDS)
-				//timerÖĞhistogram Í³¼ÆÖµµÄÖÜÆÚ
+				//timerä¸­histogram ç»Ÿè®¡å€¼çš„å‘¨æœŸ
 				.convertDurationsTo(TimeUnit.MILLISECONDS).build();
 		reporter.start(1, TimeUnit.MINUTES);
 	}
 
-	// »º´æ½Ó¿ÚÕâÀïÊÇLoadingCache£¬LoadingCacheÔÚ»º´æÏî²»´æÔÚÊ±¿ÉÒÔ×Ô¶¯¼ÓÔØ»º´æ
+	// ç¼“å­˜æ¥å£è¿™é‡Œæ˜¯LoadingCacheï¼ŒLoadingCacheåœ¨ç¼“å­˜é¡¹ä¸å­˜åœ¨æ—¶å¯ä»¥è‡ªåŠ¨åŠ è½½ç¼“å­˜
 	private static final LoadingCache<String, LongAdder> METRIC_CACHE
-	// CacheBuilderµÄ¹¹Ôìº¯ÊıÊÇË½ÓĞµÄ£¬Ö»ÄÜÍ¨¹ıÆä¾²Ì¬·½·¨newBuilder()À´»ñµÃCacheBuilderµÄÊµÀı
+	// CacheBuilderçš„æ„é€ å‡½æ•°æ˜¯ç§æœ‰çš„ï¼Œåªèƒ½é€šè¿‡å…¶é™æ€æ–¹æ³•newBuilder()æ¥è·å¾—CacheBuilderçš„å®ä¾‹
 			= CacheBuilder.newBuilder()
-					// ÉèÖÃ²¢·¢¼¶±ğÎª8£¬²¢·¢¼¶±ğÊÇÖ¸¿ÉÒÔÍ¬Ê±Ğ´»º´æµÄÏß³ÌÊı
+					// è®¾ç½®å¹¶å‘çº§åˆ«ä¸º8ï¼Œå¹¶å‘çº§åˆ«æ˜¯æŒ‡å¯ä»¥åŒæ—¶å†™ç¼“å­˜çš„çº¿ç¨‹æ•°
 					.concurrencyLevel(8)
-					// ÉèÖÃĞ´»º´æºó8ÃëÖÓ¹ıÆÚ
+					// è®¾ç½®å†™ç¼“å­˜å8ç§’é’Ÿè¿‡æœŸ
 					.expireAfterWrite(8, TimeUnit.SECONDS)
-					// ÉèÖÃ»º´æÈİÆ÷µÄ³õÊ¼ÈİÁ¿Îª10
+					// è®¾ç½®ç¼“å­˜å®¹å™¨çš„åˆå§‹å®¹é‡ä¸º10
 					.initialCapacity(10)
-					// ÉèÖÃ»º´æ×î´óÈİÁ¿Îª100£¬³¬¹ı100Ö®ºó¾Í»á°´ÕÕLRU×î½üËäÉÙÊ¹ÓÃËã·¨À´ÒÆ³ı»º´æÏî
+					// è®¾ç½®ç¼“å­˜æœ€å¤§å®¹é‡ä¸º100ï¼Œè¶…è¿‡100ä¹‹åå°±ä¼šæŒ‰ç…§LRUæœ€è¿‘è™½å°‘ä½¿ç”¨ç®—æ³•æ¥ç§»é™¤ç¼“å­˜é¡¹
 					.maximumSize(100)
-					// ÉèÖÃÒªÍ³¼Æ»º´æµÄÃüÖĞÂÊ
+					// è®¾ç½®è¦ç»Ÿè®¡ç¼“å­˜çš„å‘½ä¸­ç‡
 					.recordStats()
-					// ÉèÖÃ»º´æµÄÒÆ³ıÍ¨Öª
+					// è®¾ç½®ç¼“å­˜çš„ç§»é™¤é€šçŸ¥
 					.removalListener(new RemovalListener<Object, Object>() {
 						@Override
 						public void onRemoval(RemovalNotification<Object, Object> notification) {
@@ -57,7 +57,7 @@ public class MetricsUtils {
 									notification.getKey() + " was removed, cause is " + notification.getCause());
 						}
 					})
-					// build·½·¨ÖĞ¿ÉÒÔÖ¸¶¨CacheLoader£¬ÔÚ»º´æ²»´æÔÚÊ±Í¨¹ıCacheLoaderµÄÊµÏÖ×Ô¶¯¼ÓÔØ»º´æ
+					// buildæ–¹æ³•ä¸­å¯ä»¥æŒ‡å®šCacheLoaderï¼Œåœ¨ç¼“å­˜ä¸å­˜åœ¨æ—¶é€šè¿‡CacheLoaderçš„å®ç°è‡ªåŠ¨åŠ è½½ç¼“å­˜
 					.build(new CacheLoader<String, LongAdder>() {
 						@Override
 						public LongAdder load(String key) throws Exception {
@@ -66,8 +66,8 @@ public class MetricsUtils {
 					});
 
 	/**
-	 * Í³¼ÆÒ»¶ÎÊ±¼äÄÚµÄÆ½¾ùÖµ£¬×î´óÖµ£¬×îĞ¡Öµ
-	 * £¨ÓĞ¼¸ÖÖÍ³¼ÆËã·¨£¬Ä¬ÈÏÊÇÈ«¾ÖÊ±¼äÄÚ£¬¿ÉÒÔÑ¡ÔñExponentiallyDecayingReservoir£¨×î½üÎå·ÖÖÓÄÚ£©/SlidingWindowReservoir£¨Ö¸¶¨»¬¶¯´°¿Ú£©/SlidingTimeWindowReservoir£¨Ö¸¶¨»¬¶¯´°¿ÚÊ±¼ä£©£©
+	 * ç»Ÿè®¡ä¸€æ®µæ—¶é—´å†…çš„å¹³å‡å€¼ï¼Œæœ€å¤§å€¼ï¼Œæœ€å°å€¼
+	 * ï¼ˆæœ‰å‡ ç§ç»Ÿè®¡ç®—æ³•ï¼Œé»˜è®¤æ˜¯å…¨å±€æ—¶é—´å†…ï¼Œå¯ä»¥é€‰æ‹©ExponentiallyDecayingReservoirï¼ˆæœ€è¿‘äº”åˆ†é’Ÿå†…ï¼‰/SlidingWindowReservoirï¼ˆæŒ‡å®šæ»‘åŠ¨çª—å£ï¼‰/SlidingTimeWindowReservoirï¼ˆæŒ‡å®šæ»‘åŠ¨çª—å£æ—¶é—´ï¼‰ï¼‰
 	 * 
 	 * @param name
 	 * @return
@@ -77,7 +77,7 @@ public class MetricsUtils {
 	}
 
 	/**
-	 * Í³¼Æ´ÎÊıÆ½¾ùÖµ£¨´ÎÊı/Ê±¼ä£©
+	 * ç»Ÿè®¡æ¬¡æ•°å¹³å‡å€¼ï¼ˆæ¬¡æ•°/æ—¶é—´ï¼‰
 	 * 
 	 * @param name
 	 * @return
@@ -87,7 +87,7 @@ public class MetricsUtils {
 	}
 
 	/**
-	 * Í¬Ê±Í³¼ÆhistogramºÍmeter
+	 * åŒæ—¶ç»Ÿè®¡histogramå’Œmeter
 	 * 
 	 * @param name
 	 * @return

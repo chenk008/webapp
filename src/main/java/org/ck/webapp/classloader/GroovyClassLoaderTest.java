@@ -8,7 +8,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 /**
- * -verbose 输出类的load和unload信息
+ * -verbose 杈撳嚭绫荤殑load鍜寀nload淇℃伅
  * 
  * @author wuhua.ck
  *
@@ -28,7 +28,7 @@ public class GroovyClassLoaderTest {
 		GroovyClassLoader loader = new GroovyClassLoader();
 		Class<?> newClazz = loader.parseClass(scriptText);
 		try {
-			//利用GroovyClassLoader$InnerLoader加载
+			//鍒╃敤GroovyClassLoader$InnerLoader鍔犺浇
 			Object obj = newClazz.newInstance();
 			Script script = (Script) obj;
 			script.run();

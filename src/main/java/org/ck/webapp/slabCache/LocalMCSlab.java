@@ -21,7 +21,7 @@ public class LocalMCSlab<K, V> {
 	/**
 	 * Linked list to maintain time that cache objects were initially added to
 	 * the cache, most recently added to oldest added.
-	 * Á´±í½á¹¹£¬¸ù¾İ¼ÓÈëÊ±¼äÅÅ³ÉÁĞ±í
+	 * é“¾è¡¨ç»“æ„ï¼Œæ ¹æ®åŠ å…¥æ—¶é—´æ’æˆåˆ—è¡¨
 	 */
 	protected LinkedList ageList;
 
@@ -37,7 +37,7 @@ public class LocalMCSlab<K, V> {
 
 	public synchronized boolean put(K key, byte[] value, boolean removeLRU) {
 		if (removeLRU) {
-			// µ±LRU²ßÂÔ·¢ÉúÊ±£¬²»ÔÙ´´½¨ĞÂµÄbyte[]£¬¶øÊÇÖØĞ´×îÀÏµÄÒ»¸öbyte[]£¬²¢°ÑÕâ¸öcacheÒÆ¶¯µ½Á´±íÍ·²¿£¬ÈÃCacheObject¿ÉÒÔÖØÓÃ
+			// å½“LRUç­–ç•¥å‘ç”Ÿæ—¶ï¼Œä¸å†åˆ›å»ºæ–°çš„byte[]ï¼Œè€Œæ˜¯é‡å†™æœ€è€çš„ä¸€ä¸ªbyte[]ï¼Œå¹¶æŠŠè¿™ä¸ªcacheç§»åŠ¨åˆ°é“¾è¡¨å¤´éƒ¨ï¼Œè®©CacheObjectå¯ä»¥é‡ç”¨
 			LinkedListNode lastNode = ageList.removeLast();
 			Object lasthashKey = hashKeyMap.remove(lastNode.object);
 
@@ -60,7 +60,7 @@ public class LocalMCSlab<K, V> {
 			System.arraycopy(value, 0, data, 0, value.length);
 			CacheObject<byte[]> cacheObject = new CacheObject<byte[]>(data);
 			cacheObject.length = value.length;
-			//Ê¹ÓÃÓëÒµÎñÎŞ¹ØµÄhashKey£¬ÊÇÎªÁËÈÃCacheObject¿ÉÒÔÖØÓÃ¡£Ò»¸öCacheObjectºÍÒ»¸öhashKeyÓÀ¾Ã¹ØÁª£¬ÒµÎñkeyºÍhashKey¹ØÁª
+			//ä½¿ç”¨ä¸ä¸šåŠ¡æ— å…³çš„hashKeyï¼Œæ˜¯ä¸ºäº†è®©CacheObjectå¯ä»¥é‡ç”¨ã€‚ä¸€ä¸ªCacheObjectå’Œä¸€ä¸ªhashKeyæ°¸ä¹…å…³è”ï¼Œä¸šåŠ¡keyå’ŒhashKeyå…³è”
 			Object hashKey = new Object();
 			hashKeyMap.put(key, hashKey);
 			map.put(hashKey, cacheObject);
@@ -91,7 +91,7 @@ public class LocalMCSlab<K, V> {
 	}
 
 	/**
-	 * keyÎªÒµÎñ·½ÎŞ·¨¸ĞÖªµÄ
+	 * keyä¸ºä¸šåŠ¡æ–¹æ— æ³•æ„ŸçŸ¥çš„
 	 * @param key
 	 */
 	public synchronized void remove(Object key) {
@@ -99,7 +99,7 @@ public class LocalMCSlab<K, V> {
 	}
 
 	/**
-	 * keyÎªÒµÎñkey
+	 * keyä¸ºä¸šåŠ¡key
 	 * @param key
 	 * @return
 	 */

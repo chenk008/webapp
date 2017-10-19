@@ -5,8 +5,8 @@ public class TestTLAB {
 	/**
 	 * -XX:+PrintTLAB -XX:+Verbose
 	 * 
-	 * TLABResize Ĭ����true��ÿ��gc��ʱ�򶼻ᶯ̬����ÿ���̵߳�TLAB��С��ÿ���̲߳�ͬ
-	 * refill �����ָ����̵߳�TLAB������desired_size����TLAB�Ĵ�С��refill waste��ָû����������TLAB
+	 * TLABResize 默认是true，每次gc的时候都会动态调整每个线程的TLAB大小，每个线程不同
+	 * refill 代表分给该线程的TLAB块数，desired_size就是TLAB的大小，refill waste是指没有用起来的TLAB
 	 * 
 	 * @param args
 	 * @throws InterruptedException

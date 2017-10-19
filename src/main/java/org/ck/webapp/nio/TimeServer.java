@@ -14,7 +14,7 @@ public class TimeServer {
 			try {
 				port = Integer.valueOf(args[0]);
 			} catch (NumberFormatException e) {
-				// ²ÉÓÃÄ¬ÈÏÖµ
+				// é‡‡ç”¨é»˜è®¤å€¼
 			}
 		}
 		MultiplexerTimeServer timeServer = new MultiplexerTimeServer(port);

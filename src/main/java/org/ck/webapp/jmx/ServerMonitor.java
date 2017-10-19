@@ -1,9 +1,9 @@
 package org.ck.webapp.jmx;
 
 /**
- * MBean£¬±»¹ÜÀí¶ÔÏó£¬Ò»ÈçJavaBean¡£Bean¶ÔÏó£¬ÊµÌå£¬¶ÔÓ¦×ÊÔ´
+ * MBeanï¼Œè¢«ç®¡ç†å¯¹è±¡ï¼Œä¸€å¦‚JavaBeanã€‚Beanå¯¹è±¡ï¼Œå®ä½“ï¼Œå¯¹åº”èµ„æº
  * 
- * ÀàÃû±ØĞë·ûºÏ MBean¹æ·¶£º xxx implments xxxMBean
+ * ç±»åå¿…é¡»ç¬¦åˆ MBeanè§„èŒƒï¼š xxx implments xxxMBean
  * 
  * @author ck
  *

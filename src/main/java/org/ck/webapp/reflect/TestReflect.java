@@ -6,7 +6,7 @@ public class TestReflect {
 
 	/**
 	 * java -XX:+TraceClassLoading TestClassLoad  
-		¿´µ½GeneratedMethodAccessor1
+		çœ‹åˆ°GeneratedMethodAccessor1
 	 * @param args
 	 * @throws Exception
 	 */

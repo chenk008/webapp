@@ -19,7 +19,7 @@ public class MultiplexerTimeServer implements Runnable {
 	private volatile boolean stop;
 
 	/**
-	 * ³õÊ¼»¯¶àÂ·¸´ÓÃÆ÷¡¢°ó¶¨¼àÌı¶Ë¿Ú
+	 * åˆå§‹åŒ–å¤šè·¯å¤ç”¨å™¨ã€ç»‘å®šç›‘å¬ç«¯å£
 	 * 
 	 * @param port
 	 */
@@ -72,7 +72,7 @@ public class MultiplexerTimeServer implements Runnable {
 			}
 		}
 
-		// ¶àÂ·¸´ÓÃÆ÷¹Ø±Õºó£¬ËùÓĞ×¢²áÔÚÉÏÃæµÄChannelºÍPipeµÈ×ÊÔ´¶¼»á±»×Ô¶¯È¥×¢²á²¢¹Ø±Õ£¬ËùÒÔ²»ĞèÒªÖØ¸´ÊÍ·Å×ÊÔ´
+		// å¤šè·¯å¤ç”¨å™¨å…³é—­åï¼Œæ‰€æœ‰æ³¨å†Œåœ¨ä¸Šé¢çš„Channelå’ŒPipeç­‰èµ„æºéƒ½ä¼šè¢«è‡ªåŠ¨å»æ³¨å†Œå¹¶å…³é—­ï¼Œæ‰€ä»¥ä¸éœ€è¦é‡å¤é‡Šæ”¾èµ„æº
 		if (selector != null)
 			try {
 				selector.close();
@@ -84,14 +84,14 @@ public class MultiplexerTimeServer implements Runnable {
 	private void handleInput(SelectionKey key) throws IOException {
 
 		if (key.isValid()) {
-			// ´¦ÀíĞÂ½ÓÈëµÄÇëÇóÏûÏ¢
+			// å¤„ç†æ–°æ¥å…¥çš„è¯·æ±‚æ¶ˆæ¯
 			if (key.isAcceptable()) {
 				// Accept the new connection
 				ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
 				SocketChannel sc = ssc.accept();
-				//·Ç×èÈûÄ£Ê½ÏÂ£¬write()·½·¨ÔÚÉĞÎ´Ğ´³öÈÎºÎÄÚÈİÊ±¿ÉÄÜ¾Í·µ»ØÁË
-				//·Ç×èÈûÄ£Ê½ÏÂ,read()·½·¨ÔÚÉĞÎ´¶ÁÈ¡µ½ÈÎºÎÊı¾İÊ±¿ÉÄÜ¾Í·µ»ØÁË
-				//ÔÚ·Ç×èÈûÄ£Ê½ÏÂ£¬´ËÊ±µ÷ÓÃconnect()£¬¸Ã·½·¨¿ÉÄÜÔÚÁ¬½Ó½¨Á¢Ö®Ç°¾Í·µ»ØÁË
+				//éé˜»å¡æ¨¡å¼ä¸‹ï¼Œwrite()æ–¹æ³•åœ¨å°šæœªå†™å‡ºä»»ä½•å†…å®¹æ—¶å¯èƒ½å°±è¿”å›äº†
+				//éé˜»å¡æ¨¡å¼ä¸‹,read()æ–¹æ³•åœ¨å°šæœªè¯»å–åˆ°ä»»ä½•æ•°æ®æ—¶å¯èƒ½å°±è¿”å›äº†
+				//åœ¨éé˜»å¡æ¨¡å¼ä¸‹ï¼Œæ­¤æ—¶è°ƒç”¨connect()ï¼Œè¯¥æ–¹æ³•å¯èƒ½åœ¨è¿æ¥å»ºç«‹ä¹‹å‰å°±è¿”å›äº†
 				sc.configureBlocking(false);
 				// Add the new connection to the selector
 				sc.register(selector, SelectionKey.OP_READ);
@@ -111,11 +111,11 @@ public class MultiplexerTimeServer implements Runnable {
 							? new java.util.Date(System.currentTimeMillis()).toString() : "BAD ORDER";
 					doWrite(sc, currentTime);
 				} else if (readBytes < 0) {
-					// ¶Ô¶ËÁ´Â·¹Ø±Õ
+					// å¯¹ç«¯é“¾è·¯å…³é—­
 					key.cancel();	
 					sc.close();
 				} else
-					; // ¶Áµ½0×Ö½Ú£¬ºöÂÔ
+					; // è¯»åˆ°0å­—èŠ‚ï¼Œå¿½ç•¥
 			}
 		}
 	}

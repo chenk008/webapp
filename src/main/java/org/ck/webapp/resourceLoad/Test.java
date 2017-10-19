@@ -9,9 +9,9 @@ public class Test {
 	public static void main(String[] args) {
 		BufferedReader reader = null;
 		try {
-			// »áÀûÓÃURLClassPathÀïÃæµÄJarLoader£¨Ã¿¸öjar¶ÔÓ¦Ò»¸ö£©´ÓjarÎÄ¼ş¶ÁÈ¡
-			// ÓĞ¶à¸öJarLoader£¬°´ÕÕË³ĞòÒ»¸öÒ»¸ö¶¼£¬ÏÈ¶Áµ½Ôò·µ»Ø
-			// ±ØĞëÒªÓÃgetResourceAsStream£¬²»ÄÜÓÃ¶ÁÎÄ¼şµÄĞÎÊ½¶ÁÈ¡£¬ÒòÎªjar°üÀïÃæµÄ×ÊÔ´ÎÄ¼ş¶Ô²Ù×÷ÏµÍ³À´Ëµ²»ÊÇÒ»¸öÎÄ¼ş
+			// ä¼šåˆ©ç”¨URLClassPathé‡Œé¢çš„JarLoaderï¼ˆæ¯ä¸ªjarå¯¹åº”ä¸€ä¸ªï¼‰ä»jaræ–‡ä»¶è¯»å–
+			// æœ‰å¤šä¸ªJarLoaderï¼ŒæŒ‰ç…§é¡ºåºä¸€ä¸ªä¸€ä¸ªéƒ½ï¼Œå…ˆè¯»åˆ°åˆ™è¿”å›
+			// å¿…é¡»è¦ç”¨getResourceAsStreamï¼Œä¸èƒ½ç”¨è¯»æ–‡ä»¶çš„å½¢å¼è¯»å–ï¼Œå› ä¸ºjaråŒ…é‡Œé¢çš„èµ„æºæ–‡ä»¶å¯¹æ“ä½œç³»ç»Ÿæ¥è¯´ä¸æ˜¯ä¸€ä¸ªæ–‡ä»¶
 			reader = new BufferedReader(new InputStreamReader(Test.class
 					.getClassLoader().getResourceAsStream("resourceLoad/a")));
 			String row;

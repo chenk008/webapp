@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
- * 优先本classloader记载
+ * 浼樺厛鏈琧lassloader璁拌浇
  * 
  * @author viruser
  *

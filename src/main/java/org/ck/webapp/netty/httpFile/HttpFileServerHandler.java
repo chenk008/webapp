@@ -83,7 +83,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		}
 		RandomAccessFile randomAccessFile = null;
 		try {
-			randomAccessFile = new RandomAccessFile(file, "r");// ÒÔÖ»¶ÁµÄ·½Ê½´ò¿ªÎÄ¼þ
+			randomAccessFile = new RandomAccessFile(file, "r");// ä»¥åªè¯»çš„æ–¹å¼æ‰“å¼€æ–‡ä»¶
 		} catch (FileNotFoundException fnfe) {
 			sendError(ctx, NOT_FOUND);
 			return;
@@ -163,13 +163,13 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
 		buf.append("<!DOCTYPE html>\r\n");
 		buf.append("<html><head><title>");
 		buf.append(dirPath);
-		buf.append(" Ä¿Â¼£º");
+		buf.append(" ç›®å½•ï¼š");
 		buf.append("</title></head><body>\r\n");
 		buf.append("<h3>");
-		buf.append(dirPath).append(" Ä¿Â¼£º");
+		buf.append(dirPath).append(" ç›®å½•ï¼š");
 		buf.append("</h3>\r\n");
 		buf.append("<ul>");
-		buf.append("<li>Á´½Ó£º<a href=\"../\">..</a></li>\r\n");
+		buf.append("<li>é“¾æŽ¥ï¼š<a href=\"../\">..</a></li>\r\n");
 		for (File f : dir.listFiles()) {
 			if (f.isHidden() || !f.canRead()) {
 				continue;
@@ -178,7 +178,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
 			if (!ALLOWED_FILE_NAME.matcher(name).matches()) {
 				continue;
 			}
-			buf.append("<li>Á´½Ó£º<a href=\"");
+			buf.append("<li>é“¾æŽ¥ï¼š<a href=\"");
 			buf.append(name);
 			buf.append("\">");
 			buf.append(name);

@@ -5,10 +5,10 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 /**
- * class 要想被unload，它对应的classloader必须也可被垃圾收回掉
+ * class 瑕佹兂琚玼nload锛屽畠瀵瑰簲鐨刢lassloader蹇呴』涔熷彲琚瀮鍦炬敹鍥炴帀
  * 
  * -XX:+PrintGCDetails 
- * -verbose 输出类的load和unload信息
+ * -verbose 杈撳嚭绫荤殑load鍜寀nload淇℃伅
  * @author wuhua.ck
  *
  */

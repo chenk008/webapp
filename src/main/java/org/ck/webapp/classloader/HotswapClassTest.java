@@ -4,13 +4,13 @@ public class HotswapClassTest {
 
 	public static void main(String[] args) {
 		try {
-			//每次创建特定类加载器的新实例来加载指定类型的不同版本
+			//姣忔鍒涘缓鐗瑰畾绫诲姞杞藉櫒鐨勬柊瀹炰緥鏉ュ姞杞芥寚瀹氱被鍨嬬殑涓嶅悓鐗堟湰
 			MyURLClassLoader classLoader1 = new MyURLClassLoader();
 			Class classLoaded1 = classLoader1.loadClass("classloader.MyClass");
 			MyURLClassLoader classLoader2 = new MyURLClassLoader();
 			Class classLoaded2 = classLoader2.loadClass("classloader.MyClass");
 
-			// 判断两个Class实例是否相同
+			// 鍒ゆ柇涓や釜Class瀹炰緥鏄惁鐩稿悓
 			System.out.println(classLoaded1 == classLoaded2);
 		} catch (Exception e) {
 			e.printStackTrace();

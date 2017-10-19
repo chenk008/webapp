@@ -1,9 +1,9 @@
 package org.ck.webapp.hotswap;
 
 /**
- * spring loadÄÜreload .classÎÄ¼ş
- * ÕıÔÚÖ´ĞĞµÄ´úÂë£¬ÊÇÎŞ·¨reloadµÄ
- * -Dspringloaded=watchJars  ¿ÉÒÔ¼à¿Ø²¢ÇÒreload jar
+ * spring loadèƒ½reload .classæ–‡ä»¶
+ * æ­£åœ¨æ‰§è¡Œçš„ä»£ç ï¼Œæ˜¯æ— æ³•reloadçš„
+ * -Dspringloaded=watchJars  å¯ä»¥ç›‘æ§å¹¶ä¸”reload jar
  * -Dspringloaded="verbose;watchJars=spring-load-example-extra.jar" 
  * 
  * @author viruser

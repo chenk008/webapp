@@ -25,15 +25,15 @@ public class HttpFileServer {
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						protected void initChannel(SocketChannel ch) throws Exception {
-							ch.pipeline().addLast("http-decoder", new HttpRequestDecoder()); // ÇëÇóÏûÏ¢½âÂëÆ÷
-							ch.pipeline().addLast("http-aggregator", new HttpObjectAggregator(65536));// Ä¿µÄÊÇ½«¶à¸öÏûÏ¢×ª»»Îªµ¥Ò»µÄrequest»òÕßresponse¶ÔÏó
-							ch.pipeline().addLast("http-encoder", new HttpResponseEncoder());// ÏìÓ¦½âÂëÆ÷
-							ch.pipeline().addLast("http-chunked", new ChunkedWriteHandler());// Ä¿µÄÊÇÖ§³ÖÒì²½´óÎÄ¼ş´«Êä£¨£©
-							ch.pipeline().addLast("fileServerHandler", new HttpFileServerHandler(url));// ÒµÎñÂß¼­
+							ch.pipeline().addLast("http-decoder", new HttpRequestDecoder()); // è¯·æ±‚æ¶ˆæ¯è§£ç å™¨
+							ch.pipeline().addLast("http-aggregator", new HttpObjectAggregator(65536));// ç›®çš„æ˜¯å°†å¤šä¸ªæ¶ˆæ¯è½¬æ¢ä¸ºå•ä¸€çš„requestæˆ–è€…responseå¯¹è±¡
+							ch.pipeline().addLast("http-encoder", new HttpResponseEncoder());// å“åº”è§£ç å™¨
+							ch.pipeline().addLast("http-chunked", new ChunkedWriteHandler());// ç›®çš„æ˜¯æ”¯æŒå¼‚æ­¥å¤§æ–‡ä»¶ä¼ è¾“ï¼ˆï¼‰
+							ch.pipeline().addLast("fileServerHandler", new HttpFileServerHandler(url));// ä¸šåŠ¡é€»è¾‘
 						}
 					});
 			ChannelFuture future = b.bind("192.168.1.102", port).sync();
-			System.out.println("HTTPÎÄ¼şÄ¿Â¼·şÎñÆ÷Æô¶¯£¬ÍøÖ·ÊÇ : " + "http://192.168.1.102:" + port + url);
+			System.out.println("HTTPæ–‡ä»¶ç›®å½•æœåŠ¡å™¨å¯åŠ¨ï¼Œç½‘å€æ˜¯ : " + "http://192.168.1.102:" + port + url);
 			future.channel().closeFuture().sync();
 		} finally {
 			bossGroup.shutdownGracefully();

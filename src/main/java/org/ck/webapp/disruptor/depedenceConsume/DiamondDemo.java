@@ -13,19 +13,19 @@ import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
 
 /**
- * ÁâĞÎÏû·Ñ½á¹¹ Created by hll on 2016/8/1.
+ * è±å½¢æ¶ˆè´¹ç»“æ„ Created by hll on 2016/8/1.
  */
 public class DiamondDemo {
 	public static void main(String[] args) throws InterruptedException {
-		// Ïû·ÑÏß³Ì³Ø
+		// æ¶ˆè´¹çº¿ç¨‹æ± 
 		ExecutorService executorService = Executors.newFixedThreadPool(3);
 		EventFactory<OrderEvent> eventFactory = new OrderEventFactory();
 		Disruptor<OrderEvent> disruptor = new Disruptor<>(eventFactory, 1024 * 1024, executorService,
 				ProducerType.SINGLE, new BusySpinWaitStrategy());
 
-		// ±»AccessNameHandler¡¢AccessPriceHandler¸÷Ïû·ÑÒ»´Î£¨²»±£Ö¤Ë³Ğò£©£¬×îºó¶¼»á±»FinalEventHandlerÏû·ÑÒ»´Î£¨±£Ö¤Ë³Ğò£©
+		// è¢«AccessNameHandlerã€AccessPriceHandlerå„æ¶ˆè´¹ä¸€æ¬¡ï¼ˆä¸ä¿è¯é¡ºåºï¼‰ï¼Œæœ€åéƒ½ä¼šè¢«FinalEventHandleræ¶ˆè´¹ä¸€æ¬¡ï¼ˆä¿è¯é¡ºåºï¼‰
 		
-		//¹ØÓÚÏû·ÑÕßµÄ´¦ÀíÁ´Â·£¬ÍêÈ«¶¼ÊÇ¿¿ringbufferµÄSequenceBarrierÀ´Íê³ÉµÄ
+		//å…³äºæ¶ˆè´¹è€…çš„å¤„ç†é“¾è·¯ï¼Œå®Œå…¨éƒ½æ˜¯é ringbufferçš„SequenceBarrieræ¥å®Œæˆçš„
 		disruptor.handleEventsWith(new AccessNameHandler(), new AccessPriceHandler()).then(new FinalEventHandler());
 		
 		disruptor.start();

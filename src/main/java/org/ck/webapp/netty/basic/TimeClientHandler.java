@@ -39,7 +39,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-		// ÊÍ·Å×ÊÔ´
+		// é‡Šæ”¾èµ„æº
 		logger.warning("Unexpected exception from downstream : " + cause.getMessage());
 		ctx.close();
 	}

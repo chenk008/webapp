@@ -25,7 +25,7 @@ public class TimeClientHandle implements Runnable {
 		try {
 			selector = Selector.open();
 			socketChannel = SocketChannel.open();
-			// ÉèÖÃÎª·Ç×èÈû
+			// è®¾ç½®ä¸ºéžé˜»å¡ž
 			socketChannel.configureBlocking(false);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class TimeClientHandle implements Runnable {
 			}
 		}
 
-		// ¶àÂ·¸´ÓÃÆ÷¹Ø±Õºó£¬ËùÓÐ×¢²áÔÚÉÏÃæµÄChannelºÍPipeµÈ×ÊÔ´¶¼»á±»×Ô¶¯È¥×¢²á²¢¹Ø±Õ£¬ËùÒÔ²»ÐèÒªÖØ¸´ÊÍ·Å×ÊÔ´
+		// å¤šè·¯å¤ç”¨å™¨å…³é—­åŽï¼Œæ‰€æœ‰æ³¨å†Œåœ¨ä¸Šé¢çš„Channelå’ŒPipeç­‰èµ„æºéƒ½ä¼šè¢«è‡ªåŠ¨åŽ»æ³¨å†Œå¹¶å…³é—­ï¼Œæ‰€ä»¥ä¸éœ€è¦é‡å¤é‡Šæ”¾èµ„æº
 		if (selector != null)
 			try {
 				selector.close();
@@ -84,19 +84,19 @@ public class TimeClientHandle implements Runnable {
 	private void handleInput(SelectionKey key) throws IOException {
 
 		if (key.isValid()) {
-			// ÅÐ¶ÏÊÇ·ñÁ¬½Ó³É¹¦
+			// åˆ¤æ–­æ˜¯å¦è¿žæŽ¥æˆåŠŸ
 			SocketChannel sc = (SocketChannel) key.channel();
 			if (key.isConnectable()) {
-				//´¦ÓÚ¸ÕÁ¬½Ó×´Ì¬£¬·þÎñÆ÷ÒÑ¾­·µ»ØACK£¬
+				//å¤„äºŽåˆšè¿žæŽ¥çŠ¶æ€ï¼ŒæœåŠ¡å™¨å·²ç»è¿”å›žACKï¼Œ
 				if (sc.finishConnect()) {
 					sc.register(selector, SelectionKey.OP_READ);
 					doWrite(sc);
 				} else
-					System.exit(1);// Á¬½ÓÊ§°Ü£¬½ø³ÌÍË³ö
+					System.exit(1);// è¿žæŽ¥å¤±è´¥ï¼Œè¿›ç¨‹é€€å‡º
 			}
 			if (key.isReadable()) {
 				ByteBuffer readBuffer = ByteBuffer.allocate(1024);
-				//Òì²½¶Á
+				//å¼‚æ­¥è¯»
 				int readBytes = sc.read(readBuffer);
 				if (readBytes > 0) {
 					readBuffer.flip();
@@ -106,25 +106,25 @@ public class TimeClientHandle implements Runnable {
 					System.out.println("Now is : " + body);
 					this.stop = true;
 				} else if (readBytes < 0) {
-					// ¶Ô¶ËÁ´Â·¹Ø±Õ
+					// å¯¹ç«¯é“¾è·¯å…³é—­
 					key.cancel();
 					sc.close();
 				} else
-					; // ¶Áµ½0×Ö½Ú£¬ºöÂÔ
+					; // è¯»åˆ°0å­—èŠ‚ï¼Œå¿½ç•¥
 			}
 		}
 
 	}
 
 	private void doConnect() throws IOException {
-		// Òì²½Á¬½Ó
-		// Èç¹ûÖ±½ÓÁ¬½Ó³É¹¦£¬Ôò×¢²áµ½¶àÂ·¸´ÓÃÆ÷ÉÏ£¬·¢ËÍÇëÇóÏûÏ¢£¬¶ÁÓ¦´ð
+		// å¼‚æ­¥è¿žæŽ¥
+		// å¦‚æžœç›´æŽ¥è¿žæŽ¥æˆåŠŸï¼Œåˆ™æ³¨å†Œåˆ°å¤šè·¯å¤ç”¨å™¨ä¸Šï¼Œå‘é€è¯·æ±‚æ¶ˆæ¯ï¼Œè¯»åº”ç­”
 		if (socketChannel.connect(new InetSocketAddress(host, port))) {
-			//Á¬½Ó³É¹¦
+			//è¿žæŽ¥æˆåŠŸ
 			socketChannel.register(selector, SelectionKey.OP_READ);
 			doWrite(socketChannel);
 		} else
-			//·þÎñÆ÷»¹Ã»ÓÐ·µ»ØTCPÎÕÊÖÓ¦´ðÏûÏ¢
+			//æœåŠ¡å™¨è¿˜æ²¡æœ‰è¿”å›žTCPæ¡æ‰‹åº”ç­”æ¶ˆæ¯
 			socketChannel.register(selector, SelectionKey.OP_CONNECT);
 	}
 
@@ -134,7 +134,7 @@ public class TimeClientHandle implements Runnable {
 		writeBuffer.put(req);
 		writeBuffer.flip();
 		sc.write(writeBuffer);
-		//Ð´°ë°ü
+		//å†™åŠåŒ…
 		if (!writeBuffer.hasRemaining())
 			System.out.println("Send order 2 server succeed.");
 	}

@@ -15,9 +15,9 @@ import javax.management.MBeanInfo;
 import javax.management.ReflectionException;
 
 /**
- * ¶ÔÓÚºÜ¶àÒÑÓĞµÄ bean ÊµÏÖ£¬Æä ±àÂë¹æ·¶ ²¢²»·ûºÏ±ê×¼ MBean µÄÒªÇó¡£ÖØ¹¹ËùÓĞÕâĞ© bean ÒÔ·ûºÏ±ê×¼ MBean ±ê×¼¼È·ÑÁ¦Ò²²»Êµ¼Ê¡£JMX
- * ÖĞ¸ø³öÁË¶¯Ì¬£¨Dynamic£© MBean µÄ¸ÅÄî£¬MBServer ²»ÔÙÒÀ¾İ ±àÂë¹æ·¶ ¶øÊÇÖ±½Ó²éÑ¯¶¯Ì¬ MBean ¸ø³öµÄÔªÊı¾İ£¨meta
- * data£©ÒÔ»ñµÃ MBean µÄ¶ÔÍâ½Ó¿Ú
+ * å¯¹äºå¾ˆå¤šå·²æœ‰çš„ bean å®ç°ï¼Œå…¶ ç¼–ç è§„èŒƒ å¹¶ä¸ç¬¦åˆæ ‡å‡† MBean çš„è¦æ±‚ã€‚é‡æ„æ‰€æœ‰è¿™äº› bean ä»¥ç¬¦åˆæ ‡å‡† MBean æ ‡å‡†æ—¢è´¹åŠ›ä¹Ÿä¸å®é™…ã€‚JMX
+ * ä¸­ç»™å‡ºäº†åŠ¨æ€ï¼ˆDynamicï¼‰ MBean çš„æ¦‚å¿µï¼ŒMBServer ä¸å†ä¾æ® ç¼–ç è§„èŒƒ è€Œæ˜¯ç›´æ¥æŸ¥è¯¢åŠ¨æ€ MBean ç»™å‡ºçš„å…ƒæ•°æ®ï¼ˆmeta
+ * dataï¼‰ä»¥è·å¾— MBean çš„å¯¹å¤–æ¥å£
  * 
  * @author viruser
  *
@@ -31,12 +31,12 @@ public class ServerMonitor implements DynamicMBean {
 		this.target = target;
 	}
 
-	// ÊµÏÖ»ñÈ¡±»¹ÜÀíµÄ ServerImpl µÄ upTime
+	// å®ç°è·å–è¢«ç®¡ç†çš„ ServerImpl çš„ upTime
 	public long upTime() {
 		return target.getUptime();
 	}
 
-	// javax.management.MBeanServer »áÍ¨¹ı²éÑ¯ getAttribute("Uptime") »ñµÃ "Uptime" ÊôĞÔÖµ
+	// javax.management.MBeanServer ä¼šé€šè¿‡æŸ¥è¯¢ getAttribute("Uptime") è·å¾— "Uptime" å±æ€§å€¼
 	public Object getAttribute(String attribute)
 			throws AttributeNotFoundException, MBeanException, ReflectionException {
 		if (attribute.equals("UpTime")) {
@@ -45,23 +45,23 @@ public class ServerMonitor implements DynamicMBean {
 		return null;
 	}
 
-	// ¸ø³ö ServerMonitor µÄÔªĞÅÏ¢¡£
+	// ç»™å‡º ServerMonitor çš„å…ƒä¿¡æ¯ã€‚
 	public MBeanInfo getMBeanInfo() {
 		if (mBeanInfo == null) {
 			try {
 				Class cls = this.getClass();
-				// ÓÃ·´Éä»ñµÃ "upTime" ÊôĞÔµÄ¶Á·½·¨
+				// ç”¨åå°„è·å¾— "upTime" å±æ€§çš„è¯»æ–¹æ³•
 				Method readMethod = cls.getMethod("upTime", new Class[0]);
-				// ÓÃ·´Éä»ñµÃ¹¹Ôì·½·¨
+				// ç”¨åå°„è·å¾—æ„é€ æ–¹æ³•
 				Constructor constructor = cls.getConstructor(new Class[] { ServerMonitorImpl.class });
-				// ¹ØÓÚ "upTime" ÊôĞÔµÄÔªĞÅÏ¢ : Ãû³ÆÎª UpTime£¬Ö»¶ÁÊôĞÔ ( Ã»ÓĞĞ´·½·¨ )¡£
+				// å…³äº "upTime" å±æ€§çš„å…ƒä¿¡æ¯ : åç§°ä¸º UpTimeï¼Œåªè¯»å±æ€§ ( æ²¡æœ‰å†™æ–¹æ³• )ã€‚
 				MBeanAttributeInfo upTimeMBeanAttributeInfo = new MBeanAttributeInfo("UpTime",
 						"The time span since server start", readMethod, null);
-				// ¹ØÓÚ¹¹Ôìº¯ÊıµÄÔªĞÅÏ¢
+				// å…³äºæ„é€ å‡½æ•°çš„å…ƒä¿¡æ¯
 				MBeanConstructorInfo mBeanConstructorInfo = new MBeanConstructorInfo("Constructor for ServerMonitor",
 						constructor);
-				// ServerMonitor µÄÔªĞÅÏ¢£¬ÎªÁË¼òµ¥Æğ¼û£¬ÔÚÕâ¸öÀı×ÓÀï£¬
-				// Ã»ÓĞÌá¹© invocation ÒÔ¼° listener ·½ÃæµÄÔªĞÅÏ¢
+				// ServerMonitor çš„å…ƒä¿¡æ¯ï¼Œä¸ºäº†ç®€å•èµ·è§ï¼Œåœ¨è¿™ä¸ªä¾‹å­é‡Œï¼Œ
+				// æ²¡æœ‰æä¾› invocation ä»¥åŠ listener æ–¹é¢çš„å…ƒä¿¡æ¯
 				mBeanInfo = new MBeanInfo(cls.getName(), "Monitor that controls the server",
 						new MBeanAttributeInfo[] { upTimeMBeanAttributeInfo },
 						new MBeanConstructorInfo[] { mBeanConstructorInfo }, null, null);

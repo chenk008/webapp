@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ÓÃÀ´ÅÜgcµÄ²âÊÔÓÃÀı
+ * ç”¨æ¥è·‘gcçš„æµ‹è¯•ç”¨ä¾‹
  * @author ck
  *
  */

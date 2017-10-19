@@ -3,7 +3,7 @@ package org.ck.webapp.disruptor;
 import com.lmax.disruptor.EventFactory;
 
 /**
- * Created by hll on 2016/8/1. 用于初始化event
+ * Created by hll on 2016/8/1. 鐢ㄤ簬鍒濆鍖杄vent
  */
 public class OrderEventFactory implements EventFactory<OrderEvent> {
 	@Override

@@ -16,11 +16,11 @@ import javax.management.modelmbean.RequiredModelMBean;
 
 /**
  * 
- * ÆÕÍ¨µÄ¶¯Ì¬ Bean Í¨³£È±·¦Ò»Ğ©¹ÜÀíÏµÍ³ËùĞèÒªµÄÖ§³Ö£º±ÈÈç³Ö¾Ã»¯ MBean
- * µÄ×´Ì¬¡¢ÈÕÖ¾¼ÇÂ¼¡¢»º´æµÈµÈ¡£Èç¹ûÈÃÓÃ»§È¥Ò»Ò»ÊµÏÖÕâĞ©¹¦ÄÜÈ·ÊµÊÇ¼ş¿İÔïÎŞÁÄµÄ¹¤×÷¡£ÎªÁË¼õÇáÓÃ»§µÄ¸ºµ££¬JMX Ìá¹©ÉÌ¶¼»áÌá¹©²»Í¬µÄ ModelBean
- * ÊµÏÖ¡£ÆäÖĞÓĞÒ»¸ö½Ó¿ÚÊÇ Java
- * ¹æ·¶ÖĞ¹æ¶¨ËùÓĞ³§ÉÌ±ØĞëÊµÏÖµÄ£ºjavax.management.modelmbean.RequiredModelBean¡£Í¨¹ıÅäÖÃ Descriptor
- * ĞÅÏ¢£¬ÎÒÃÇ¿ÉÒÔ¶¨ÖÆÕâ¸ö Model Bean£¬ Ö¸¶¨ÄÄĞ© MBean ×´Ì¬ĞèÒª¼ÇÈëÈÕÖ¾¡¢ÈçºÎ¼ÇÂ¼ÒÔ¼°ÊÇ·ñ»º´æÄ³Ğ©ÊôĞÔ¡¢»º´æ¶à¾ÃµÈµÈ¡£
+ * æ™®é€šçš„åŠ¨æ€ Bean é€šå¸¸ç¼ºä¹ä¸€äº›ç®¡ç†ç³»ç»Ÿæ‰€éœ€è¦çš„æ”¯æŒï¼šæ¯”å¦‚æŒä¹…åŒ– MBean
+ * çš„çŠ¶æ€ã€æ—¥å¿—è®°å½•ã€ç¼“å­˜ç­‰ç­‰ã€‚å¦‚æœè®©ç”¨æˆ·å»ä¸€ä¸€å®ç°è¿™äº›åŠŸèƒ½ç¡®å®æ˜¯ä»¶æ¯ç‡¥æ— èŠçš„å·¥ä½œã€‚ä¸ºäº†å‡è½»ç”¨æˆ·çš„è´Ÿæ‹…ï¼ŒJMX æä¾›å•†éƒ½ä¼šæä¾›ä¸åŒçš„ ModelBean
+ * å®ç°ã€‚å…¶ä¸­æœ‰ä¸€ä¸ªæ¥å£æ˜¯ Java
+ * è§„èŒƒä¸­è§„å®šæ‰€æœ‰å‚å•†å¿…é¡»å®ç°çš„ï¼šjavax.management.modelmbean.RequiredModelBeanã€‚é€šè¿‡é…ç½® Descriptor
+ * ä¿¡æ¯ï¼Œæˆ‘ä»¬å¯ä»¥å®šåˆ¶è¿™ä¸ª Model Beanï¼Œ æŒ‡å®šå“ªäº› MBean çŠ¶æ€éœ€è¦è®°å…¥æ—¥å¿—ã€å¦‚ä½•è®°å½•ä»¥åŠæ˜¯å¦ç¼“å­˜æŸäº›å±æ€§ã€ç¼“å­˜å¤šä¹…ç­‰ç­‰ã€‚
  */
 public class Main {
 
@@ -30,11 +30,11 @@ public class Main {
 				.instantiate("javax.management.modelmbean.RequiredModelMBean");
 
 		ObjectName serverMBeanName = new ObjectName("server: id=Server");
-		// ºÍÆäËü MBean,Î¨Ò»²»Í¬µÄÊÇ£¬ModelMBean ĞèÒª¶îÍâÁ½²½
-		// µÚÒ»²½ÓÃÓÚÌá¹© serverMBean µÄÔªÊı¾İ
+		// å’Œå…¶å®ƒ MBean,å”¯ä¸€ä¸åŒçš„æ˜¯ï¼ŒModelMBean éœ€è¦é¢å¤–ä¸¤æ­¥
+		// ç¬¬ä¸€æ­¥ç”¨äºæä¾› serverMBean çš„å…ƒæ•°æ®
 		serverMBean.setModelMBeanInfo(getModelMBeanInfoForServer(serverMBeanName));
 		Server server = new Server();
-		// µÚ¶ş²½Ö¸³öÁË ServerMBean ¹ÜÀíµÄ¶ÔÏó
+		// ç¬¬äºŒæ­¥æŒ‡å‡ºäº† ServerMBean ç®¡ç†çš„å¯¹è±¡
 		serverMBean.setManagedResource(server, "ObjectReference");
 
 		ObjectInstance registeredServerMBean = mBeanServer.registerMBean((Object) serverMBean, serverMBeanName);
@@ -74,8 +74,8 @@ public class Main {
 				"ModelMBean for managing an Server", serverAttributes, null, serverOperations, null);
 
 		// Default strategy for the MBean.
-		// ÆäÖĞÓÃ "currencyTimeLimit=10" Ö¸³öÊôĞÔµÄ»º´æÊ±¼äÊÇ 10 Ãë¡£ËùÒÔ£¬ÔÚ Main ·½·¨ÖĞ£¬Á½´Î
-		// serverMBean.getAttribute("upTime")£»Ö®¼äµÄ¼ä¸ôĞ¡ÓÚ 10 Ãë¾Í»áµÃµ½Í¬ÑùµÄ»º´æÖµ
+		// å…¶ä¸­ç”¨ "currencyTimeLimit=10" æŒ‡å‡ºå±æ€§çš„ç¼“å­˜æ—¶é—´æ˜¯ 10 ç§’ã€‚æ‰€ä»¥ï¼Œåœ¨ Main æ–¹æ³•ä¸­ï¼Œä¸¤æ¬¡
+		// serverMBean.getAttribute("upTime")ï¼›ä¹‹é—´çš„é—´éš”å°äº 10 ç§’å°±ä¼šå¾—åˆ°åŒæ ·çš„ç¼“å­˜å€¼
 		Descriptor serverDescription = new DescriptorSupport(
 				new String[] { ("name=" + objectName), "descriptorType=mbean", ("displayName=Server"),
 						"type=modelmbean.Server", "log=T", "logFile=serverMX.log", "currencyTimeLimit=10" });

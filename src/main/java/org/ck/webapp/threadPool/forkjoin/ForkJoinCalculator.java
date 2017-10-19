@@ -50,14 +50,14 @@ public class ForkJoinCalculator implements Calculator {
 
 		// @Override
 		// protected Long compute() {
-		// // µ±ĞèÒª¼ÆËãµÄÊı×ÖĞ¡ÓÚ6Ê±£¬Ö±½Ó¼ÆËã½á¹û
+		// // å½“éœ€è¦è®¡ç®—çš„æ•°å­—å°äº6æ—¶ï¼Œç›´æ¥è®¡ç®—ç»“æœ
 		// if (to - from < 6) {
 		// long total = 0;
 		// for (int i = from; i <= to; i++) {
 		// total += numbers[i];
 		// }
 		// return total;
-		// // ·ñÔò£¬°ÑÈÎÎñÒ»·ÖÎª¶ş£¬µİ¹é¼ÆËã
+		// // å¦åˆ™ï¼ŒæŠŠä»»åŠ¡ä¸€åˆ†ä¸ºäºŒï¼Œé€’å½’è®¡ç®—
 		// } else {
 		// int middle = (from + to) / 2;
 		// SumTask taskLeft = new SumTask(numbers, from, middle);
@@ -70,7 +70,7 @@ public class ForkJoinCalculator implements Calculator {
 	}
 
 	public ForkJoinCalculator() {
-		// Ò²¿ÉÒÔÊ¹ÓÃ¹«ÓÃµÄ ForkJoinPool£º
+		// ä¹Ÿå¯ä»¥ä½¿ç”¨å…¬ç”¨çš„ ForkJoinPoolï¼š
 		// pool = ForkJoinPool.commonPool()
 		pool = new ForkJoinPool();
 	}

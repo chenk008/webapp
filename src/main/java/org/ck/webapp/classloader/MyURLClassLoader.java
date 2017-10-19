@@ -24,7 +24,7 @@ public class MyURLClassLoader extends URLClassLoader {
 	}
 
 	/**
-	 * Ê§È¥µÄË«Ç×Î¯ÍĞ»áµ¼ÖÂ ±»¼ÓÔØÀàËùÒÀÀµµÄÀà ÕÒ²»µ½
+	 * å¤±å»çš„åŒäº²å§”æ‰˜ä¼šå¯¼è‡´ è¢«åŠ è½½ç±»æ‰€ä¾èµ–çš„ç±» æ‰¾ä¸åˆ°
 	 */
 	@Override
 	public Class<?> loadClass(String name) throws ClassNotFoundException {

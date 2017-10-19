@@ -17,7 +17,7 @@ public class SpringSubContext {
 		context.setResourceLoader(classResolver);
 		context.scan("org.ck.webapp.springReactor1");
 		context.refresh();
-		// 必须用这个classloader
+		// 蹇呴』鐢ㄨ繖涓猚lassloader
 		Class<?> targetClass = classLoader.loadClass("org.ck.webapp.springReactor1.MyReactiveLibraryTest");
 		Method targetMethod = targetClass.getMethod("say");
 		targetMethod.invoke(context.getBean(targetClass));

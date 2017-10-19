@@ -5,13 +5,13 @@ public class SynchronizedTest {
 	public static void main(String[] args) throws InterruptedException {
 		String a = "1";
 		new TestThread(a).start();
-		// ÓÉÓÚa¡¢bÊÇ×Ö·û´®£¬³£Á¿³ØÖĞa¡¢bÊÇÍ¬Ò»¸ö¶ÔÏó
+		// ç”±äºaã€bæ˜¯å­—ç¬¦ä¸²ï¼Œå¸¸é‡æ± ä¸­aã€bæ˜¯åŒä¸€ä¸ªå¯¹è±¡
 		String b = "1";
 		new TestThread(b).start();
 
 		Thread.sleep(10L);
 		a = "2";
-		//Õâ¸öÏß³ÌÄÜÄÃµ½Ëø£¬ÒòÎªaµÄ¶ÔÏó·¢ÉúÁË±ä»¯£¬ËøµÄÊÇ¡°1¡±Õâ¸ö×Ö·û´®¶ÔÏó
+		//è¿™ä¸ªçº¿ç¨‹èƒ½æ‹¿åˆ°é”ï¼Œå› ä¸ºaçš„å¯¹è±¡å‘ç”Ÿäº†å˜åŒ–ï¼Œé”çš„æ˜¯â€œ1â€è¿™ä¸ªå­—ç¬¦ä¸²å¯¹è±¡
 		new TestThread(a).start();
 	}
 

@@ -22,7 +22,7 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-		//将队列中的数据写入到SocketChannel
+		//灏嗛槦鍒椾腑鐨勬暟鎹啓鍏ュ埌SocketChannel
 		ctx.flush();
 	}
 

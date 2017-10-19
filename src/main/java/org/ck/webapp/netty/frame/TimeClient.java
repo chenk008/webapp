@@ -12,7 +12,7 @@ import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 
 /**
- * Ö§³ÖÕ³°üµÄ¿Í»§¶Ë
+ * æ”¯æŒç²˜åŒ…çš„å®¢æˆ·ç«¯
  * 
  * @author viruser
  *
@@ -20,7 +20,7 @@ import io.netty.handler.codec.string.StringDecoder;
 public class TimeClient {
 
 	public void connect(int port, String host) throws Exception {
-		// ÅäÖÃ¿Í»§¶ËNIOÏß³Ì×é
+		// é…ç½®å®¢æˆ·ç«¯NIOçº¿ç¨‹ç»„
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
 			Bootstrap b = new Bootstrap();
@@ -34,13 +34,13 @@ public class TimeClient {
 						}
 					});
 
-			// ·¢ÆğÒì²½Á¬½Ó²Ù×÷
+			// å‘èµ·å¼‚æ­¥è¿æ¥æ“ä½œ
 			ChannelFuture f = b.connect(host, port).sync();
 
-			// µ±´ú¿Í»§¶ËÁ´Â·¹Ø±Õ
+			// å½“ä»£å®¢æˆ·ç«¯é“¾è·¯å…³é—­
 			f.channel().closeFuture().sync();
 		} finally {
-			// ÓÅÑÅÍË³ö£¬ÊÍ·ÅNIOÏß³Ì×é
+			// ä¼˜é›…é€€å‡ºï¼Œé‡Šæ”¾NIOçº¿ç¨‹ç»„
 			group.shutdownGracefully();
 		}
 	}
@@ -55,7 +55,7 @@ public class TimeClient {
 			try {
 				port = Integer.valueOf(args[0]);
 			} catch (NumberFormatException e) {
-				// ²ÉÓÃÄ¬ÈÏÖµ
+				// é‡‡ç”¨é»˜è®¤å€¼
 			}
 		}
 		new TimeClient().connect(port, "127.0.0.1");
