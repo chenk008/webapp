@@ -11,7 +11,8 @@ import com.sun.tools.attach.VirtualMachine;
 public class AttachWork {
 
 	/**
-	 * jvm attach api²âÊÔ
+	 * jvm attach apiæµ‹è¯•
+	 * 
 	 * @param args
 	 * @throws Exception
 	 */
@@ -19,14 +20,12 @@ public class AttachWork {
 
 		VirtualMachine virtualmachine = VirtualMachine.attach("9884");
 
-		String javaHome = virtualmachine.getSystemProperties().getProperty(
-				"java.home");
-		String agentPath = javaHome + File.separator + "jre" + File.separator
-				+ "lib" + File.separator + "management-agent.jar";
+		String javaHome = virtualmachine.getSystemProperties().getProperty("java.home");
+		String agentPath = javaHome + File.separator + "jre" + File.separator + "lib" + File.separator
+				+ "management-agent.jar";
 		File file = new File(agentPath);
 		if (!file.exists()) {
-			agentPath = javaHome + File.separator + "lib" + File.separator
-					+ "management-agent.jar";
+			agentPath = javaHome + File.separator + "lib" + File.separator + "management-agent.jar";
 			file = new File(agentPath);
 			if (!file.exists()) {
 				throw new IOException("Management agent not found");
@@ -42,8 +41,7 @@ public class AttachWork {
 			throw new IOException(agentinitializationexception);
 		}
 		Properties properties = virtualmachine.getAgentProperties();
-		String address = (String) properties
-				.get("com.sun.management.jmxremote.localConnectorAddress");
+		String address = (String) properties.get("com.sun.management.jmxremote.localConnectorAddress");
 		System.out.println(address);
 		virtualmachine.detach();
 	}
